@@ -168,13 +168,13 @@ body {
 }
 
 /* ============== LAYOUT ============== */
-.app { max-width: 1280px; margin: 0 auto; padding: 0 2rem 6rem; }
+.app { max-width: 1400px; margin: 0 auto; padding: 0 2rem 6rem; }
 
 /* ============== MASTHEAD ============== */
 .masthead {
-  padding: 3rem 0 2rem;
+  padding: 2rem 0 1.5rem;
   border-bottom: 3px double var(--royal);
-  margin-bottom: 2.5rem;
+  margin-bottom: 1.75rem;
   position: relative;
 }
 .masthead-top {
@@ -184,15 +184,15 @@ body {
   letter-spacing: 0.25em;
   text-transform: uppercase;
   color: var(--ink-soft);
-  padding-bottom: 1rem;
+  padding-bottom: 0.85rem;
   border-bottom: 1px solid var(--rule);
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.25rem;
 }
 .masthead-title {
   font-family: 'Playfair Display', serif;
   font-style: italic;
   font-weight: 500;
-  font-size: clamp(3rem, 7vw, 5.5rem);
+  font-size: clamp(2.5rem, 5.5vw, 4.25rem);
   line-height: 0.95;
   color: var(--royal-deep);
   letter-spacing: -0.02em;
@@ -200,17 +200,17 @@ body {
 .masthead-subtitle {
   font-family: 'Open Sans Condensed', 'Open Sans', sans-serif;
   font-weight: 700;
-  font-size: clamp(1rem, 1.8vw, 1.3rem);
+  font-size: clamp(0.95rem, 1.6vw, 1.15rem);
   letter-spacing: 0.3em;
   color: var(--azure);
   text-transform: uppercase;
-  margin-top: 0.75rem;
+  margin-top: 0.6rem;
 }
 .masthead-meta {
-  display: flex; gap: 2rem; flex-wrap: wrap;
-  margin-top: 1.5rem;
+  display: flex; gap: 1.5rem; flex-wrap: wrap;
+  margin-top: 1rem;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.78rem;
+  font-size: 0.75rem;
   letter-spacing: 0.08em;
   color: var(--ink-soft);
 }
@@ -226,9 +226,9 @@ body {
   grid-template-columns: repeat(4, 1fr);
   background: var(--royal-deep);
   color: var(--bone);
-  padding: 1.25rem 1rem;
+  padding: 1rem 1rem;
   border-radius: 2px;
-  margin-bottom: 2.5rem;
+  margin-bottom: 1.75rem;
   box-shadow: var(--shadow-sm);
 }
 .countdown-cell {
@@ -436,33 +436,37 @@ body {
 
 .ws-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
 }
 
 .ws-card {
   background: var(--cream);
   border: 1px solid var(--rule);
-  border-radius: 2px;
+  border-radius: 4px;
   overflow: hidden;
-  transition: box-shadow 0.3s, transform 0.3s;
+  transition: box-shadow 0.3s, transform 0.3s, border-color 0.3s;
   cursor: pointer;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 340px;
 }
 .ws-card:hover {
   box-shadow: var(--shadow);
-  transform: translateY(-2px);
+  transform: translateY(-3px);
+  border-color: var(--accent, var(--royal));
 }
 .ws-card-head {
-  padding: 1.75rem 2rem 1.25rem;
+  padding: 1.5rem 1.5rem 1.25rem;
   position: relative;
-  border-bottom: 1px solid var(--rule);
+  flex: 1;
 }
 .ws-card-head::before {
   content: '';
   position: absolute;
-  left: 0; top: 0; bottom: 0;
-  width: 4px;
+  left: 0; top: 0; right: 0;
+  height: 5px;
   background: var(--accent, var(--royal));
 }
 .ws-card[data-ws="sponsorships"] { --accent: var(--royal-deep); --accent-text: var(--royal-deep); }
@@ -470,13 +474,15 @@ body {
 .ws-card[data-ws="ops"]          { --accent: var(--azure);      --accent-text: var(--azure); }
 .ws-card[data-ws="auction"]      { --accent: var(--sky);        --accent-text: var(--royal); }
 
-.ws-card-eyebrow {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.7rem;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
+.ws-card-num {
+  font-family: 'Open Sans Condensed', 'Open Sans', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.2em;
   color: var(--accent-text, var(--accent));
-  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.9rem;
+  text-transform: uppercase;
 }
 .ws-card-title {
   font-family: 'Playfair Display', serif;
@@ -484,79 +490,45 @@ body {
   font-style: italic;
   font-size: 2rem;
   color: var(--royal-deep);
-  line-height: 1;
-  margin-bottom: 0.6rem;
+  line-height: 1.05;
+  margin-bottom: 0.85rem;
+  letter-spacing: -0.01em;
 }
 .ws-card-lede {
-  font-size: 1.05rem;
-  color: var(--ink-soft);
+  font-size: 1rem;
+  color: var(--ink);
   line-height: 1.5;
 }
 
-.ws-card-body {
-  padding: 1.25rem 2rem 1.75rem;
-}
-
-.ws-card-stats {
-  display: flex;
-  gap: 2rem;
-  margin-bottom: 1.25rem;
-  padding-bottom: 1.25rem;
-  border-bottom: 1px dotted var(--rule);
-}
-.ws-stat-num {
-  font-family: 'Open Sans', sans-serif;
-  font-weight: 800;
-  font-size: 1.75rem;
-  color: var(--royal-deep);
-  line-height: 1;
-  letter-spacing: -0.01em;
-}
-.ws-stat-label {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.7rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--ink-soft);
-  margin-top: 0.25rem;
-}
-
-.ws-subs {
-  display: grid;
-  gap: 0.5rem;
-}
-.ws-sub-pill {
+.ws-card-foot {
+  padding: 1rem 1.5rem;
+  border-top: 1px solid var(--rule);
+  background: var(--bone);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.55rem 0;
-  font-family: 'Open Sans', sans-serif;
-  font-size: 1.02rem;
-  color: var(--ink);
-  border-bottom: 1px solid transparent;
-  transition: border-color 0.15s, color 0.15s;
 }
-.ws-sub-pill:last-child { }
-.ws-sub-pill .owner {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.7rem;
-  color: var(--ink-soft);
-  letter-spacing: 0.05em;
-}
-.ws-card:hover .ws-sub-pill { border-bottom-color: var(--bone-dark); }
-
-.ws-card-cta {
-  margin-top: 1.25rem;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.75rem;
-  color: var(--accent-text, var(--accent));
-  letter-spacing: 0.2em;
+.ws-card-roles-count {
+  font-family: 'Open Sans Condensed', 'Open Sans', sans-serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
-  display: flex; align-items: center; gap: 0.5rem;
+  color: var(--ink-soft);
+}
+.ws-card-cta {
+  font-family: 'Open Sans Condensed', 'Open Sans', sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--accent-text, var(--accent));
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  display: flex; align-items: center; gap: 0.4rem;
 }
 .ws-card-cta::after {
   content: '→';
   transition: transform 0.2s;
+  font-size: 1.1rem;
 }
 .ws-card:hover .ws-card-cta::after { transform: translateX(4px); }
 
@@ -980,6 +952,13 @@ body {
 }
 
 /* ============== RESPONSIVE ============== */
+/* Tablet: 4 → 2 columns */
+@media (max-width: 1100px) {
+  .ws-grid { grid-template-columns: repeat(2, 1fr); }
+  .ws-card { min-height: 280px; }
+  .ws-card-title { font-size: 2.1rem; }
+}
+
 @media (max-width: 880px) {
   .app { padding: 0 1.25rem 4rem; }
   .countdown-strip { grid-template-columns: repeat(2, 1fr); }
@@ -989,7 +968,11 @@ body {
   .revenue-streams { grid-template-columns: 1fr; }
   .stream { border-right: none; border-bottom: 1px solid var(--rule); }
   .stream:last-child { border-bottom: none; }
-  .ws-grid { grid-template-columns: 1fr; }
+  .ws-grid { grid-template-columns: 1fr; gap: 1rem; }
+  .ws-card { min-height: 0; }
+  .ws-card-head { padding: 1.25rem 1.25rem 1rem; }
+  .ws-card-title { font-size: 1.8rem; }
+  .ws-card-foot { padding: 0.85rem 1.25rem; }
   .event-info { grid-template-columns: 1fr; }
   .masthead-meta { gap: 1rem; font-size: 0.8rem; }
   /* Detail view mobile tweaks */
@@ -1050,9 +1033,7 @@ body {
     <div class="masthead-subtitle">Committee Command · 2026</div>
     <div class="masthead-meta">
       <span><span class="dot"></span>Saturday · May 2, 2026</span>
-      <span><span class="dot"></span>5:00 – 10:00 PM</span>
       <span><span class="dot"></span>2700 Luberon Lane, Cumming GA</span>
-      <span><span class="dot"></span>~400 regional leaders</span>
     </div>
   </header>
 
@@ -1076,11 +1057,26 @@ body {
     </div>
   </div>
 
-  <!-- REVENUE DASHBOARD -->
-  <section class="revenue fade-up d2">
+  <!-- WORKSTREAMS (primary navigation) -->
+  <section class="workstreams fade-up d2">
     <div class="section-head">
       <div>
-        <div class="eyebrow">§ I · The Purse</div>
+        <div class="eyebrow">§ I · The Field</div>
+        <h2>Four Workstreams</h2>
+      </div>
+      <div class="right">Click any card for details</div>
+    </div>
+
+    <div class="ws-grid" id="ws-grid">
+      <!-- Cards injected by JS -->
+    </div>
+  </section>
+
+  <!-- REVENUE DASHBOARD -->
+  <section class="revenue fade-up d3">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">§ II · The Purse</div>
         <h2>Revenue Dashboard</h2>
       </div>
       <div class="right">$365K+ raised since 2021</div>
@@ -1135,7 +1131,7 @@ body {
   </section>
 
   <!-- EVENT INFO STRIP -->
-  <section class="event-info fade-up d3">
+  <section class="event-info fade-up d4">
     <div class="event-info-cell">
       <h5>The Running</h5>
       <div class="val">Saturday, May 2, 2026<br>5:00 – 10:00 PM</div>
@@ -1147,21 +1143,6 @@ body {
     <div class="event-info-cell">
       <h5>The Purse</h5>
       <div class="val">$120,000 target<br><span style="font-size:0.9rem; color:var(--gold-soft);">for local charities</span></div>
-    </div>
-  </section>
-
-  <!-- WORKSTREAMS -->
-  <section class="workstreams fade-up d4">
-    <div class="section-head">
-      <div>
-        <div class="eyebrow">§ II · The Field</div>
-        <h2>Four Workstreams</h2>
-      </div>
-      <div class="right">Click any card for details</div>
-    </div>
-
-    <div class="ws-grid" id="ws-grid">
-      <!-- Cards injected by JS -->
     </div>
   </section>
 
@@ -1918,34 +1899,22 @@ function initDashboard() {
 
   // Build workstream cards
   const grid = document.getElementById('ws-grid');
-  grid.innerHTML = WORKSTREAMS.map((ws, i) => `
+  grid.innerHTML = WORKSTREAMS.map((ws, i) => {
+    const num = ['I', 'II', 'III', 'IV'][i] || String(i+1);
+    const roleCount = (ws.subs || []).length;
+    return `
     <div class="ws-card fade-up d${i+1}" data-ws="${ws.id}" tabindex="0" role="button" aria-label="Open ${ws.title}">
       <div class="ws-card-head">
-        <div class="ws-card-eyebrow">${ws.eyebrow}</div>
+        <div class="ws-card-num">§ ${num}</div>
         <div class="ws-card-title">${ws.title}</div>
         <div class="ws-card-lede">${ws.lede}</div>
       </div>
-      <div class="ws-card-body">
-        <div class="ws-card-stats">
-          ${ws.stats.map(s => `
-            <div>
-              <div class="ws-stat-num">${s.n}</div>
-              <div class="ws-stat-label">${s.l}</div>
-            </div>
-          `).join('')}
-        </div>
-        <div class="ws-subs">
-          ${ws.subs.map(s => `
-            <div class="ws-sub-pill">
-              <span>${s.label}</span>
-              <span class="owner">${s.owner}</span>
-            </div>
-          `).join('')}
-        </div>
-        <div class="ws-card-cta">Enter workstream</div>
+      <div class="ws-card-foot">
+        <div class="ws-card-roles-count">${roleCount} roles</div>
+        <div class="ws-card-cta">Enter</div>
       </div>
     </div>
-  `).join('');
+  `;}).join('');
 
   // Wire up card clicks — open full-page detail via URL hash
   document.querySelectorAll('.ws-card').forEach(card => {
