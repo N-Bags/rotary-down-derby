@@ -253,6 +253,81 @@ body {
   margin-top: 0.4rem;
 }
 
+/* ============== EMMA QUICK ACCESS ============== */
+.emma-strip {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.1rem 1.5rem;
+  background: var(--cream);
+  border: 1px solid var(--rule);
+  border-left: 5px solid var(--gold);
+  border-radius: 3px;
+  margin-bottom: 1.75rem;
+  box-shadow: var(--shadow-sm);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.emma-strip:hover {
+  border-color: var(--gold);
+  box-shadow: 0 6px 24px rgba(12, 45, 102, 0.1);
+}
+.emma-strip-text {
+  min-width: 0;
+}
+.emma-strip-eyebrow {
+  font-family: 'Open Sans Condensed', 'Open Sans', sans-serif;
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+  margin-bottom: 0.2rem;
+}
+.emma-strip-title {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: 1.5rem;
+  color: var(--royal-deep);
+  line-height: 1.15;
+  margin-bottom: 0.15rem;
+}
+.emma-strip-url {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  letter-spacing: 0.02em;
+  word-break: break-all;
+}
+.emma-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.95rem 1.6rem;
+  background: var(--royal-deep);
+  color: var(--bone);
+  border: none;
+  font-family: 'Open Sans Condensed', 'Open Sans', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 3px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.15s, transform 0.1s;
+}
+.emma-btn:hover { background: var(--royal); }
+.emma-btn:active { transform: translateY(1px); }
+.emma-btn .arr {
+  font-size: 1.1rem;
+  line-height: 1;
+  transition: transform 0.15s;
+}
+.emma-btn:hover .arr { transform: translate(2px, -2px); }
+
 /* ============== SECTION HEADING ============== */
 .section-head {
   display: flex; align-items: baseline; justify-content: space-between;
@@ -973,6 +1048,8 @@ body {
   .ws-card-head { padding: 1.25rem 1.25rem 1rem; }
   .ws-card-title { font-size: 1.8rem; }
   .ws-card-foot { padding: 0.85rem 1.25rem; }
+  .emma-strip { grid-template-columns: 1fr; gap: 1rem; padding: 1rem 1.1rem; }
+  .emma-btn { justify-content: center; }
   .event-info { grid-template-columns: 1fr; }
   .masthead-meta { gap: 1rem; font-size: 0.8rem; }
   /* Detail view mobile tweaks */
@@ -1056,6 +1133,19 @@ body {
       <div class="countdown-label">Sixth running</div>
     </div>
   </div>
+
+  <!-- EMMA QUICK ACCESS -->
+  <a class="emma-strip fade-up d1" href="https://us.emma-live.com/LFRotary" target="_blank" rel="noopener" style="text-decoration: none; color: inherit;">
+    <div class="emma-strip-text">
+      <div class="emma-strip-eyebrow">Public event site</div>
+      <div class="emma-strip-title">Tickets, sponsorships &amp; silent auction</div>
+      <div class="emma-strip-url">us.emma-live.com/LFRotary</div>
+    </div>
+    <span class="emma-btn">
+      <span>Open Emma</span>
+      <span class="arr" aria-hidden="true">↗</span>
+    </span>
+  </a>
 
   <!-- WORKSTREAMS (primary navigation) -->
   <section class="workstreams fade-up d2">
@@ -1244,7 +1334,7 @@ const WORKSTREAMS = [
             'Checks payable to Rotary Club of Lanier-Forsyth',
             'Mail: PO Box 3166, Cumming GA 30028',
             'Or scan QR code on prospectus',
-            'Website: forsythdownandderby.com'
+            'Website: us.emma-live.com/LFRotary (Emma platform)'
           ]}
         ]
       },
@@ -1401,9 +1491,9 @@ const WORKSTREAMS = [
             'Logistics page (password-protected): day-of map, role assignments, timing'
           ]},
           { h: 'Live URLs', type: 'kv', items: [
-            ['Public site', 'forsythdownandderby.com'],
+            ['Public site', 'us.emma-live.com/LFRotary'],
             ['Facebook', 'Rotary Club of Lanier Forsyth'],
-            ['Committee logistics', '(password-gated page on Emma)'],
+            ['Committee logistics', 'derby.bagscommercial.com (this site — committee-only)'],
             ['Sponsor contact', 'sedioron77@gmail.com · 678-983-4083']
           ]},
           { h: 'QA checklist before auction launch', type: 'list', items: [
@@ -1489,7 +1579,7 @@ const WORKSTREAMS = [
             'Updated logo (version 26) \u2014 Forsyth Down & Derby crest',
             'Palette: Rotary Azure #0050a2, Royal Blue #17458f, Rotary Gold #f7a81b (the jewel), Sky Blue #01b4e7',
             'Typography: Open Sans + Open Sans Condensed (Rotary brand) + Playfair Display italic for display flourishes',
-            'Banner on forsythdownandderby.com using updated logo'
+            'Banner on us.emma-live.com/LFRotary (Emma event site) using updated logo'
           ]},
           { h: 'Logo governance', type: 'list', items: [
             'Rotary masterbrand signature + "Rotary Club of Lanier Forsyth" club signature for institutional contexts',
