@@ -1,0 +1,1889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Down & Derby · Committee Command</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500&family=Open+Sans:wght@300;400;500;600;700;800&family=Open+Sans+Condensed:wght@300;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* =========================================================
+   ROTARY CLUB OF LANIER FORSYTH · DOWN & DERBY COMMITTEE COMMAND
+   Aesthetic: Rotary brand × horse-racing program × command center
+   Palette: Rotary Azure, Royal Blue, Gold — per official brand center
+   ========================================================= */
+
+:root {
+  /* Rotary official brand colors (2022 Brand Center) */
+  --azure: #0050a2;        /* Rotary Azure — use most often */
+  --azure-bright: #0067c8; /* one-color Rotary masterbrand */
+  --royal: #17458f;        /* Rotary Royal Blue — emphasis */
+  --royal-deep: #0c2d66;   /* deepened royal for dark grounds */
+  --sky: #01b4e7;          /* Rotary Sky Blue — highlight only */
+  --gold: #f7a81b;         /* Rotary Gold — the jewel */
+  --gold-deep: #d68f0a;    /* hand-deepened gold for text on light */
+  --gold-soft: #fde4a3;    /* gold pastel */
+  /* Supporting neutrals (warm but cooler than before to sit with blue) */
+  --cream: #f7f5f0;
+  --bone: #ede9df;
+  --bone-dark: #d8d2c4;
+  --ink: #1a1a1a;
+  --ink-soft: #4a4a4a;
+  --rule: #d4d7de;
+  --shadow: 0 20px 60px rgba(12, 45, 102, 0.18);
+  --shadow-sm: 0 4px 20px rgba(12, 45, 102, 0.08);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  font-size: 17px;
+  line-height: 1.55;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse at 20% 0%, rgba(247, 168, 27, 0.04) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 100%, rgba(23, 69, 143, 0.03) 0%, transparent 50%);
+}
+
+.serif-display { font-family: 'Playfair Display', Georgia, serif; }
+.mono { font-family: 'JetBrains Mono', monospace; font-size: 0.82em; letter-spacing: 0.02em; }
+
+/* ============== GATE ============== */
+.gate {
+  position: fixed; inset: 0;
+  background: var(--royal-deep);
+  background-image:
+    radial-gradient(circle at 30% 20%, rgba(247, 168, 27, 0.15) 0%, transparent 45%),
+    radial-gradient(circle at 70% 80%, rgba(1, 180, 231, 0.12) 0%, transparent 45%);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 1000;
+  padding: 2rem;
+  transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+.gate.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+
+.gate-card {
+  max-width: 420px; width: 100%;
+  text-align: center;
+  color: var(--bone);
+}
+
+.gate-crest {
+  width: 72px; height: 90px;
+  margin: 0 auto 1.75rem;
+  display: block;
+}
+
+.gate-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.35em;
+  color: var(--gold-deep);
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.gate-title {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: 2.75rem;
+  line-height: 1;
+  margin-bottom: 0.4rem;
+}
+
+.gate-subtitle {
+  font-family: 'Open Sans Condensed', 'Open Sans', sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: 0.22em;
+  color: var(--bone);
+  margin-bottom: 2.5rem;
+  text-transform: uppercase;
+}
+
+.gate-input-wrap {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.gate-input {
+  width: 100%;
+  padding: 1rem 1.25rem;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1.1rem;
+  background: rgba(245, 240, 230, 0.08);
+  border: 1px solid rgba(245, 240, 230, 0.2);
+  color: var(--bone);
+  border-radius: 2px;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+.gate-input:focus {
+  border-color: var(--gold-deep);
+  background: rgba(245, 240, 230, 0.12);
+}
+.gate-input::placeholder { color: rgba(245, 240, 230, 0.4); font-style: italic; }
+
+.gate-btn {
+  width: 100%;
+  padding: 1rem;
+  background: var(--gold);
+  color: var(--royal-deep);
+  border: none;
+  font-family: 'Open Sans Condensed', 'Open Sans', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: background 0.2s, transform 0.1s;
+}
+.gate-btn:hover { background: var(--gold-deep); }
+.gate-btn:active { transform: translateY(1px); }
+
+.gate-hint {
+  margin-top: 1.5rem;
+  font-size: 0.85rem;
+  color: rgba(245, 240, 230, 0.5);
+  font-style: italic;
+}
+.gate-error {
+  margin-top: 0.75rem;
+  font-size: 0.85rem;
+  color: var(--sky);
+  min-height: 1em;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.02em;
+}
+
+/* ============== LAYOUT ============== */
+.app { max-width: 1280px; margin: 0 auto; padding: 0 2rem 6rem; }
+
+/* ============== MASTHEAD ============== */
+.masthead {
+  padding: 3rem 0 2rem;
+  border-bottom: 3px double var(--royal);
+  margin-bottom: 2.5rem;
+  position: relative;
+}
+.masthead-top {
+  display: flex; justify-content: space-between; align-items: baseline;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 1.5rem;
+}
+.masthead-title {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(3rem, 7vw, 5.5rem);
+  line-height: 0.95;
+  color: var(--royal-deep);
+  letter-spacing: -0.02em;
+}
+.masthead-subtitle {
+  font-family: 'Open Sans Condensed', 'Open Sans', sans-serif;
+  font-weight: 700;
+  font-size: clamp(1rem, 1.8vw, 1.3rem);
+  letter-spacing: 0.3em;
+  color: var(--azure);
+  text-transform: uppercase;
+  margin-top: 0.75rem;
+}
+.masthead-meta {
+  display: flex; gap: 2rem; flex-wrap: wrap;
+  margin-top: 1.5rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  color: var(--ink-soft);
+}
+.masthead-meta span { display: inline-flex; align-items: center; gap: 0.5rem; }
+.masthead-meta .dot {
+  width: 5px; height: 5px; background: var(--gold); border-radius: 50%;
+  display: inline-block;
+}
+
+/* ============== COUNTDOWN STRIP ============== */
+.countdown-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  background: var(--royal-deep);
+  color: var(--bone);
+  padding: 1.25rem 1rem;
+  border-radius: 2px;
+  margin-bottom: 2.5rem;
+  box-shadow: var(--shadow-sm);
+}
+.countdown-cell {
+  text-align: center;
+  border-right: 1px solid rgba(245, 240, 230, 0.15);
+}
+.countdown-cell:last-child { border-right: none; }
+.countdown-num {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 800;
+  font-size: 2.75rem;
+  color: var(--gold);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.countdown-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(245, 240, 230, 0.7);
+  margin-top: 0.4rem;
+}
+
+/* ============== SECTION HEADING ============== */
+.section-head {
+  display: flex; align-items: baseline; justify-content: space-between;
+  margin-bottom: 1.5rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.section-head h2 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 500;
+  font-style: italic;
+  font-size: 2.25rem;
+  color: var(--royal-deep);
+  line-height: 1;
+}
+.section-head .eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+  margin-bottom: 0.25rem;
+}
+.section-head .right {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+}
+
+/* ============== REVENUE DASHBOARD ============== */
+.revenue { margin-bottom: 4rem; }
+
+.revenue-total {
+  background: var(--royal-deep);
+  color: var(--bone);
+  padding: 2rem 2.25rem;
+  border-radius: 2px 2px 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+.revenue-total::before {
+  content: ''; position: absolute;
+  top: 0; right: 0; width: 180px; height: 100%;
+  background: linear-gradient(135deg, transparent 40%, rgba(247, 168, 27, 0.15) 100%);
+  pointer-events: none;
+}
+.revenue-total-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+  margin-bottom: 0.3rem;
+}
+.revenue-total-value {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 800;
+  font-size: 3rem;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.revenue-goal {
+  text-align: right;
+}
+.revenue-goal-num {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+  font-size: 1.6rem;
+  color: var(--gold-soft);
+}
+.revenue-goal-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(245, 240, 230, 0.65);
+}
+
+.revenue-bar-wrap {
+  background: var(--azure);
+  height: 12px;
+  position: relative;
+  overflow: hidden;
+}
+.revenue-bar {
+  background: linear-gradient(90deg, var(--gold) 0%, var(--gold) 100%);
+  height: 100%;
+  width: 0%;
+  transition: width 1.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.revenue-streams {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr 1fr;
+  gap: 0;
+  background: var(--cream);
+  border: 1px solid var(--rule);
+  border-top: none;
+  border-radius: 0 0 2px 2px;
+  box-shadow: var(--shadow-sm);
+}
+.stream {
+  padding: 1.75rem 1.75rem;
+  border-right: 1px solid var(--rule);
+  position: relative;
+  transition: background 0.2s;
+}
+.stream:last-child { border-right: none; }
+.stream:hover { background: var(--bone); }
+.stream-rank {
+  position: absolute;
+  top: 1rem; right: 1.25rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--gold-deep);
+  letter-spacing: 0.15em;
+}
+.stream-title {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: var(--royal-deep);
+  margin-bottom: 0.3rem;
+  letter-spacing: -0.01em;
+}
+.stream-owner {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--ink-soft);
+  letter-spacing: 0.05em;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+}
+.stream-num {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 800;
+  font-size: 2.25rem;
+  color: var(--royal-deep);
+  line-height: 1;
+  margin-bottom: 0.25rem;
+  letter-spacing: -0.02em;
+}
+.stream-target {
+  font-family: 'Open Sans', sans-serif;
+  font-style: italic;
+  color: var(--ink-soft);
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+.stream-bar-bg {
+  height: 4px;
+  background: var(--bone-dark);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+.stream-bar-fill {
+  height: 100%;
+  background: var(--azure);
+  width: 0%;
+  transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
+}
+.stream .gold-bar { background: var(--gold); }
+.stream .navy-bar { background: var(--royal); }
+.stream-pct {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--ink-soft);
+  letter-spacing: 0.05em;
+}
+
+/* ============== WORKSTREAMS ============== */
+.workstreams { margin-bottom: 4rem; }
+
+.ws-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.ws-card {
+  background: var(--cream);
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  overflow: hidden;
+  transition: box-shadow 0.3s, transform 0.3s;
+  cursor: pointer;
+  position: relative;
+}
+.ws-card:hover {
+  box-shadow: var(--shadow);
+  transform: translateY(-2px);
+}
+.ws-card-head {
+  padding: 1.75rem 2rem 1.25rem;
+  position: relative;
+  border-bottom: 1px solid var(--rule);
+}
+.ws-card-head::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 4px;
+  background: var(--accent, var(--royal));
+}
+.ws-card[data-ws="sponsorships"] { --accent: var(--royal-deep); --accent-text: var(--royal-deep); }
+.ws-card[data-ws="marketing"]    { --accent: var(--gold);       --accent-text: var(--gold-deep); }
+.ws-card[data-ws="ops"]          { --accent: var(--azure);      --accent-text: var(--azure); }
+.ws-card[data-ws="auction"]      { --accent: var(--sky);        --accent-text: var(--royal); }
+
+.ws-card-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--accent-text, var(--accent));
+  margin-bottom: 0.5rem;
+}
+.ws-card-title {
+  font-family: 'Playfair Display', serif;
+  font-weight: 500;
+  font-style: italic;
+  font-size: 2rem;
+  color: var(--royal-deep);
+  line-height: 1;
+  margin-bottom: 0.6rem;
+}
+.ws-card-lede {
+  font-size: 1.05rem;
+  color: var(--ink-soft);
+  line-height: 1.5;
+}
+
+.ws-card-body {
+  padding: 1.25rem 2rem 1.75rem;
+}
+
+.ws-card-stats {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px dotted var(--rule);
+}
+.ws-stat-num {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 800;
+  font-size: 1.75rem;
+  color: var(--royal-deep);
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+.ws-stat-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-top: 0.25rem;
+}
+
+.ws-subs {
+  display: grid;
+  gap: 0.5rem;
+}
+.ws-sub-pill {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.55rem 0;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1.02rem;
+  color: var(--ink);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.15s, color 0.15s;
+}
+.ws-sub-pill:last-child { }
+.ws-sub-pill .owner {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--ink-soft);
+  letter-spacing: 0.05em;
+}
+.ws-card:hover .ws-sub-pill { border-bottom-color: var(--bone-dark); }
+
+.ws-card-cta {
+  margin-top: 1.25rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--accent-text, var(--accent));
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.ws-card-cta::after {
+  content: '→';
+  transition: transform 0.2s;
+}
+.ws-card:hover .ws-card-cta::after { transform: translateX(4px); }
+
+/* ============== DETAIL PANEL ============== */
+.panel-backdrop {
+  position: fixed; inset: 0;
+  background: rgba(12, 45, 102, 0.55);
+  backdrop-filter: blur(4px);
+  opacity: 0; visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+  z-index: 100;
+}
+.panel-backdrop.open { opacity: 1; visibility: visible; }
+
+.panel {
+  position: fixed;
+  top: 0; right: 0; bottom: 0;
+  width: min(760px, 100%);
+  background: var(--cream);
+  box-shadow: -20px 0 60px rgba(12, 45, 102, 0.25);
+  transform: translateX(100%);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 101;
+  overflow-y: auto;
+  display: flex; flex-direction: column;
+}
+.panel.open { transform: translateX(0); }
+
+.panel-head {
+  padding: 2rem 2.5rem 1.75rem;
+  background: var(--royal-deep);
+  color: var(--bone);
+  position: sticky; top: 0; z-index: 2;
+  border-bottom: 3px solid var(--gold);
+}
+.panel-close {
+  position: absolute;
+  top: 1.25rem; right: 1.5rem;
+  background: transparent;
+  border: 1px solid rgba(245, 240, 230, 0.3);
+  color: var(--bone);
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+  font-family: 'JetBrains Mono', monospace;
+}
+.panel-close:hover {
+  background: rgba(245, 240, 230, 0.1);
+  border-color: var(--gold-deep);
+}
+.panel-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+  margin-bottom: 0.5rem;
+}
+.panel-title {
+  font-family: 'Playfair Display', serif;
+  font-weight: 500;
+  font-style: italic;
+  font-size: 2.5rem;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+.panel-lede {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1.1rem;
+  color: rgba(245, 240, 230, 0.8);
+  line-height: 1.45;
+  max-width: 52ch;
+}
+
+.panel-body { padding: 0 2.5rem 3rem; }
+
+/* Sub-section nav within panel */
+.sub-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  border-bottom: 1px solid var(--rule);
+  margin: 0 -2.5rem 2rem;
+  padding: 0 2.5rem;
+  position: sticky;
+  top: 180px;
+  background: var(--cream);
+  z-index: 1;
+}
+.sub-tab {
+  padding: 1rem 0;
+  margin-right: 1.75rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  cursor: pointer;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  transition: color 0.15s, border-color 0.15s;
+  margin-bottom: -1px;
+}
+.sub-tab:hover { color: var(--royal-deep); }
+.sub-tab.active {
+  color: var(--royal-deep);
+  border-bottom-color: var(--gold-deep);
+}
+
+.sub-content { display: none; }
+.sub-content.active { display: block; animation: fade 0.3s ease; }
+@keyframes fade { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+
+.sub-content h3 {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: 1.75rem;
+  color: var(--royal-deep);
+  margin-bottom: 0.25rem;
+}
+.sub-content .owner-line {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--gold-deep);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+
+/* Info blocks in sub-content */
+.info-block {
+  margin-bottom: 2rem;
+}
+.info-block h4 {
+  font-family: 'Open Sans Condensed', 'Open Sans', sans-serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--azure);
+  margin-bottom: 0.85rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--rule);
+}
+.info-block ul {
+  list-style: none;
+  padding: 0;
+}
+.info-block ul li {
+  padding: 0.4rem 0 0.4rem 1.5rem;
+  position: relative;
+  line-height: 1.5;
+}
+.info-block ul li::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0.95rem;
+  width: 8px; height: 1px;
+  background: var(--gold-deep);
+}
+
+.timeline {
+  display: grid;
+  gap: 0;
+}
+.timeline-row {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 1.5rem;
+  padding: 0.9rem 0;
+  border-bottom: 1px dotted var(--rule);
+}
+.timeline-row:last-child { border-bottom: none; }
+.timeline-when {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+  padding-top: 0.1rem;
+}
+.timeline-what {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1.02rem;
+  color: var(--ink);
+  line-height: 1.45;
+}
+
+.note-card {
+  background: var(--bone);
+  border-left: 3px solid var(--gold);
+  padding: 1rem 1.25rem;
+  margin: 1rem 0;
+  font-style: italic;
+  color: var(--ink-soft);
+  font-size: 1.02rem;
+}
+
+.kv-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border: 1px solid var(--rule);
+  background: var(--cream);
+}
+.kv-row {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--rule);
+  font-size: 0.98rem;
+  align-items: center;
+}
+.kv-row:nth-last-child(-n+2) { border-bottom: none; }
+.kv-row:nth-child(odd) { border-right: 1px solid var(--rule); }
+.kv-row .k {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.kv-row .v { color: var(--ink); }
+
+/* ============== EVENT INFO STRIP ============== */
+.event-info {
+  background: var(--royal-deep);
+  background-image:
+    linear-gradient(135deg, var(--royal-deep) 0%, var(--azure) 100%);
+  color: var(--bone);
+  padding: 2.5rem;
+  border-radius: 2px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 4rem;
+  position: relative;
+  overflow: hidden;
+}
+.event-info::before {
+  content: '';
+  position: absolute;
+  top: -50%; right: -10%; width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(247, 168, 27, 0.15), transparent 70%);
+  pointer-events: none;
+}
+.event-info-cell h5 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+  margin-bottom: 0.6rem;
+}
+.event-info-cell .val {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+  font-size: 1.25rem;
+  line-height: 1.35;
+}
+
+/* ============== FOOTER ============== */
+.footer {
+  border-top: 3px double var(--royal);
+  padding-top: 2rem;
+  margin-top: 4rem;
+  display: flex; justify-content: space-between; align-items: baseline;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.footer .jewel { color: var(--gold-deep); font-weight: 600; }
+
+/* ============== ENTRY ANIMATIONS ============== */
+.fade-up {
+  opacity: 0;
+  transform: translateY(12px);
+  animation: fadeUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+.fade-up.d1 { animation-delay: 0.1s; }
+.fade-up.d2 { animation-delay: 0.2s; }
+.fade-up.d3 { animation-delay: 0.3s; }
+.fade-up.d4 { animation-delay: 0.4s; }
+.fade-up.d5 { animation-delay: 0.5s; }
+@keyframes fadeUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ============== RESPONSIVE ============== */
+@media (max-width: 880px) {
+  .app { padding: 0 1.25rem 4rem; }
+  .countdown-strip { grid-template-columns: repeat(2, 1fr); }
+  .countdown-cell { padding: 0.5rem 0; border-right: none; border-bottom: 1px solid rgba(245, 240, 230, 0.15); }
+  .countdown-cell:nth-child(2) { border-right: none; }
+  .countdown-cell:nth-last-child(-n+2) { border-bottom: none; }
+  .revenue-streams { grid-template-columns: 1fr; }
+  .stream { border-right: none; border-bottom: 1px solid var(--rule); }
+  .stream:last-child { border-bottom: none; }
+  .ws-grid { grid-template-columns: 1fr; }
+  .event-info { grid-template-columns: 1fr; }
+  .panel { width: 100%; }
+  .panel-head { padding: 1.5rem 1.5rem 1.25rem; }
+  .panel-body { padding: 0 1.5rem 2.5rem; }
+  .sub-tabs { margin: 0 -1.5rem 1.5rem; padding: 0 1.5rem; top: 150px; }
+  .masthead-meta { gap: 1rem; font-size: 0.7rem; }
+  .timeline-row { grid-template-columns: 100px 1fr; gap: 1rem; }
+  .kv-grid { grid-template-columns: 1fr; }
+  .kv-row { border-right: none !important; }
+  .kv-row:nth-last-child(2) { border-bottom: 1px solid var(--rule); }
+}
+
+::selection { background: var(--gold-soft); color: var(--royal-deep); }
+</style>
+</head>
+<body>
+
+<!-- ============== PASSWORD GATE ============== -->
+<div class="gate" id="gate">
+  <div class="gate-card">
+    <svg class="gate-crest" viewBox="0 0 72 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M6 8 L6 54 Q6 72 36 84 Q66 72 66 54 L66 8 Z" fill="#17458f" stroke="#f7a81b" stroke-width="1.5"/>
+      <path d="M14 16 L14 52 Q14 66 36 76 Q58 66 58 52 L58 16 Z" fill="none" stroke="#f7a81b" stroke-width="0.5"/>
+      <text x="36" y="36" text-anchor="middle" fill="#fde4a3" font-family="Playfair Display" font-style="italic" font-size="10" font-weight="500">Forsyth</text>
+      <text x="36" y="48" text-anchor="middle" fill="#fde4a3" font-family="Playfair Display" font-style="italic" font-size="10" font-weight="500">Down &amp;</text>
+      <text x="36" y="60" text-anchor="middle" fill="#f7a81b" font-family="Playfair Display" font-size="11" font-weight="900" letter-spacing="1">DERBY</text>
+      <rect x="20" y="64" width="32" height="7" fill="#0050a2"/>
+      <text x="36" y="70" text-anchor="middle" fill="#fde4a3" font-family="JetBrains Mono" font-size="5" letter-spacing="0.5">2026</text>
+    </svg>
+    <div class="gate-label">Committee Command</div>
+    <div class="gate-title">Down &amp; Derby</div>
+    <div class="gate-subtitle">Paddock Access</div>
+    <div class="gate-input-wrap">
+      <input type="password" class="gate-input" id="gate-input" placeholder="Enter passphrase" autocomplete="off" autofocus>
+    </div>
+    <button class="gate-btn" id="gate-btn">Enter the Paddock</button>
+    <div class="gate-error" id="gate-error"></div>
+    <div class="gate-hint">Committee &amp; jockeys only · May 2, 2026</div>
+  </div>
+</div>
+
+<!-- ============== APP ============== -->
+<div class="app" id="app" style="display:none;">
+
+  <!-- MASTHEAD -->
+  <header class="masthead fade-up">
+    <div class="masthead-top">
+      <span>The Rotary Club of Lanier Forsyth · Service Above Self</span>
+      <span>Committee Edition · Vol. VI</span>
+    </div>
+    <h1 class="masthead-title">Down &amp; Derby</h1>
+    <div class="masthead-subtitle">Committee Command · 2026</div>
+    <div class="masthead-meta">
+      <span><span class="dot"></span>Saturday · May 2, 2026</span>
+      <span><span class="dot"></span>5:00 – 10:00 PM</span>
+      <span><span class="dot"></span>2700 Luberon Lane, Cumming GA</span>
+      <span><span class="dot"></span>~400 regional leaders</span>
+    </div>
+  </header>
+
+  <!-- COUNTDOWN STRIP -->
+  <div class="countdown-strip fade-up d1">
+    <div class="countdown-cell">
+      <div class="countdown-num" id="cd-days">—</div>
+      <div class="countdown-label">Days out</div>
+    </div>
+    <div class="countdown-cell">
+      <div class="countdown-num" id="cd-hours">—</div>
+      <div class="countdown-label">Hours</div>
+    </div>
+    <div class="countdown-cell">
+      <div class="countdown-num" id="cd-mins">—</div>
+      <div class="countdown-label">Minutes</div>
+    </div>
+    <div class="countdown-cell">
+      <div class="countdown-num">VI</div>
+      <div class="countdown-label">Sixth running</div>
+    </div>
+  </div>
+
+  <!-- REVENUE DASHBOARD -->
+  <section class="revenue fade-up d2">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">§ I · The Purse</div>
+        <h2>Revenue Dashboard</h2>
+      </div>
+      <div class="right">$365K+ raised since 2021</div>
+    </div>
+
+    <div class="revenue-total">
+      <div>
+        <div class="revenue-total-label">Committed to date</div>
+        <div class="revenue-total-value mono" id="rev-total">$67,000</div>
+      </div>
+      <div class="revenue-goal">
+        <div class="revenue-goal-num mono">$120,000</div>
+        <div class="revenue-goal-label">Season goal</div>
+      </div>
+    </div>
+    <div class="revenue-bar-wrap">
+      <div class="revenue-bar" id="rev-bar"></div>
+    </div>
+    <div class="revenue-streams">
+
+      <div class="stream">
+        <div class="stream-rank mono">01 ·</div>
+        <div class="stream-title">Sponsorships</div>
+        <div class="stream-owner">Stephen Doiron · Sponsorship Lead</div>
+        <div class="stream-num mono" data-count="50000">$0</div>
+        <div class="stream-target">paid of $80,000 target</div>
+        <div class="stream-bar-bg"><div class="stream-bar-fill" data-pct="62.5"></div></div>
+        <div class="stream-pct"><span data-pct-label="62.5">0</span>% to target · primary driver</div>
+      </div>
+
+      <div class="stream">
+        <div class="stream-rank mono">02 ·</div>
+        <div class="stream-title">Ticket Sales</div>
+        <div class="stream-owner">Marketing Lead + Emma site</div>
+        <div class="stream-num mono" data-count="12000">$0</div>
+        <div class="stream-target">of $25,000 target (~165 tickets)</div>
+        <div class="stream-bar-bg"><div class="stream-bar-fill gold-bar" data-pct="48"></div></div>
+        <div class="stream-pct"><span data-pct-label="48">0</span>% to target · individual sales</div>
+      </div>
+
+      <div class="stream">
+        <div class="stream-rank mono">03 ·</div>
+        <div class="stream-title">Silent Auction</div>
+        <div class="stream-owner">Jerry Frasso · Auction Manager</div>
+        <div class="stream-num mono" data-count="5000">$0</div>
+        <div class="stream-target">committed · $15,000 target</div>
+        <div class="stream-bar-bg"><div class="stream-bar-fill navy-bar" data-pct="33"></div></div>
+        <div class="stream-pct"><span data-pct-label="33">0</span>% to target · opens April 1</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- EVENT INFO STRIP -->
+  <section class="event-info fade-up d3">
+    <div class="event-info-cell">
+      <h5>The Running</h5>
+      <div class="val">Saturday, May 2, 2026<br>5:00 – 10:00 PM</div>
+    </div>
+    <div class="event-info-cell">
+      <h5>The Paddock</h5>
+      <div class="val">2700 Luberon Lane<br>Cumming, GA 30041</div>
+    </div>
+    <div class="event-info-cell">
+      <h5>The Purse</h5>
+      <div class="val">$120,000 target<br><span style="font-size:0.9rem; color:var(--gold-soft);">for local charities</span></div>
+    </div>
+  </section>
+
+  <!-- WORKSTREAMS -->
+  <section class="workstreams fade-up d4">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">§ II · The Field</div>
+        <h2>Four Workstreams</h2>
+      </div>
+      <div class="right">Click any card for details</div>
+    </div>
+
+    <div class="ws-grid" id="ws-grid">
+      <!-- Cards injected by JS -->
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div>Rotary Club of Lanier Forsyth · <span class="jewel">Down &amp; Derby</span> · Committee Edition</div>
+    <div>Jockeys: route tasks · Secretary: publish tally · Chair: make the call</div>
+  </footer>
+
+</div>
+
+<!-- ============== DETAIL PANEL ============== -->
+<div class="panel-backdrop" id="backdrop"></div>
+<aside class="panel" id="panel" aria-hidden="true">
+  <div class="panel-head">
+    <button class="panel-close" id="panel-close" aria-label="Close">✕</button>
+    <div class="panel-eyebrow" id="panel-eyebrow">§ Workstream</div>
+    <div class="panel-title" id="panel-title">—</div>
+    <div class="panel-lede" id="panel-lede">—</div>
+  </div>
+  <div class="sub-tabs" id="sub-tabs"></div>
+  <div class="panel-body" id="panel-body"></div>
+</aside>
+
+<script>
+/* ====================================================
+   DATA MODEL
+   ==================================================== */
+const WORKSTREAMS = [
+  {
+    id: 'sponsorships',
+    eyebrow: '§ I · The Purse',
+    title: 'Sponsorships & Revenue',
+    lede: 'The biggest lever. Sponsorships carry roughly two-thirds of the $120K season goal — the other two streams combined should not be relied on to close the gap.',
+    stats: [
+      { n: '$80K', l: 'Target' },
+      { n: '7', l: 'Levels' },
+      { n: '$50K', l: 'Paid · committed $17K' }
+    ],
+    subs: [
+      { id: 'levels', label: 'Sponsor Levels', owner: 'Stephen Doiron' },
+      { id: 'callteam', label: 'Call Team', owner: 'Stephen Doiron' },
+      { id: 'tracking', label: 'Tracking Log', owner: 'Tracking Log Owner' },
+      { id: 'recognition', label: 'Recognition', owner: 'Sponsorship + Chair' },
+      { id: 'tickets', label: 'Ticket Sales', owner: 'Marketing + Emma' },
+      { id: 'auction-rev', label: 'Auction Revenue', owner: 'Jerry Frasso' }
+    ],
+    content: {
+      levels: {
+        title: 'Sponsor Levels',
+        owner: 'Stephen Doiron · sedioron77@gmail.com · 678-983-4083',
+        blocks: [
+          { h: 'Sponsor tiers (seven levels)', type: 'kv', items: [
+            ['Presenting Title', '$15,000 · 20 registrations · 15 bourbon bar'],
+            ['Triple Crown', '$10,000 · 15 registrations · 10 bourbon bar'],
+            ['Diamond', '$7,000 · 10 registrations · 8 bourbon bar'],
+            ['Platinum', '$5,000 · 8 registrations · 5 bourbon bar'],
+            ['Gold', '$2,500 · 6 registrations · 4 bourbon bar'],
+            ['Silver', '$1,000 · 4 registrations'],
+            ['Bronze', '$500 · 2 registrations']
+          ]},
+          { h: 'All sponsors receive', type: 'list', items: [
+            'Thank-you recognition in Forsyth County News',
+            'Logo on all pre-event marketing (if secured before printing)',
+            'Promotion on Rotary Club of Lanier Forsyth Facebook page & event website',
+            'Stage & A/V recognition at the event',
+            'Logo on projected screen throughout event (dedicated slide)'
+          ]},
+          { h: 'Key prospects', type: 'list', items: [
+            'Beaver Toyota — presenting ($15K); $15K deposit received',
+            'Animal hospital — Doc (in-kind insurance + gift cards)',
+            'Bob Hewitt, Lynard, Cherry Street — follow-ups in flight',
+            'Sunbelt Rentals — in-kind generator'
+          ]},
+          { h: 'Logistics', type: 'list', items: [
+            'Checks payable to Rotary Club of Lanier-Forsyth',
+            'Mail: PO Box 3166, Cumming GA 30028',
+            'Or scan QR code on prospectus',
+            'Website: forsythdownandderby.com'
+          ]}
+        ]
+      },
+      callteam: {
+        title: 'Sponsor Call Team',
+        owner: 'Stephen Doiron',
+        blocks: [
+          { h: 'Responsibilities', type: 'list', items: [
+            'Outbound calls on assigned prospect list (weekly quota)',
+            'Log every call outcome in the sponsorship tracker same-day',
+            'Escalate stuck deals to the Sponsorship Lead',
+            'Hand off logos + ticket counts once sponsor confirms'
+          ]},
+          { h: 'Weekly cadence', type: 'timeline', items: [
+            ['Monday', 'Secretary sends the weekly points tally; call team reviews assignments'],
+            ['Tues – Thurs', 'Outbound calls; log results in tracker'],
+            ['Friday', 'Status update to Sponsorship Lead; flag stuck deals'],
+            ['Weekly meeting', 'Review the tracker live; committee sees current totals']
+          ]},
+          { h: 'Known failure mode', type: 'note', text: 'Calls go out but the tracking log isn\u2019t updated, so follow-up is inconsistent. Mitigation: tracker updated after every contact, not at end of week.' }
+        ]
+      },
+      tracking: {
+        title: 'Tracking Log',
+        owner: 'Tracking Log Owner (TBD)',
+        blocks: [
+          { h: 'What the log tracks', type: 'list', items: [
+            'Prospect name, tier, ask amount, status (prospect → committed → paid)',
+            'Last contact date + next action',
+            'Assigned caller',
+            'Logo received (Y/N) + format',
+            'Registration/bourbon bar wristband count owed',
+            'Recognition moment scheduled (Rotary meeting date)'
+          ]},
+          { h: 'Current totals (sample)', type: 'kv', items: [
+            ['Paid', '$50,000'],
+            ['Committed (pending check)', '$17,000'],
+            ['Pipeline (in active conversation)', '~$35,000'],
+            ['Gap to $120K target', '~$18,000']
+          ]},
+          { h: 'Hand-offs out', type: 'list', items: [
+            'Logos + format requirements → Marketing (Print & Signage) 2 weeks before first print run',
+            'Charity + sponsor list → Video & Filming 1 week before Friday shoot day',
+            'Confirmed registration counts → Ticketing (Emma site)',
+            'Check pickup list → Check Pickup / Chair'
+          ]}
+        ]
+      },
+      recognition: {
+        title: 'Sponsor Recognition',
+        owner: 'Sponsorship Lead + Chair (currently fuzzy — assign explicitly)',
+        blocks: [
+          { h: 'Pre-event recognition', type: 'list', items: [
+            'Presenting / Triple Crown / Diamond: dedicated presentation at a Rotary meeting',
+            'Logo on postcards + window posters (if secured before print run)',
+            'Promotion on club Facebook + event website + Forsyth County News thank-you'
+          ]},
+          { h: 'Event-night recognition', type: 'list', items: [
+            'Stage announcement at scheduled moments',
+            'Dedicated slide on projected screen throughout',
+            'On-site signage at top tiers',
+            'Greeting by Sponsorship Lead on arrival'
+          ]},
+          { h: 'Post-event recognition', type: 'list', items: [
+            'Thank-you package with event photos + impact numbers',
+            'Highlight reel feature (top tiers)',
+            'Priority ask for next year'
+          ]},
+          { h: 'Ownership gap', type: 'note', text: 'Across meetings, no single person owned actually scheduling sponsor recognition moments at Rotary. Before next committee meeting: name one owner.' }
+        ]
+      },
+      tickets: {
+        title: 'Ticket Sales',
+        owner: 'Marketing Lead + Website/Emma Lead',
+        blocks: [
+          { h: 'The streams', type: 'list', items: [
+            'Individual tickets via Emma (with "referring Rotarian" field for points tally)',
+            'Complimentary registrations bundled in sponsor tiers (2 to 20 per tier)',
+            'Bourbon Bar wristbands (add-on + bundled in top tiers)'
+          ]},
+          { h: 'Current posture', type: 'kv', items: [
+            ['Baseline price', '~$150 / ticket'],
+            ['Target', '~165 individual tickets (~$25K)'],
+            ['Season to date', 'Slow \u2014 push with friendly reminder emails after Rotary meetings'],
+            ['Capacity', '~400 total guests']
+          ]},
+          { h: 'Marketing push plan', type: 'timeline', items: [
+            ['Early April', 'Auction opens; social push'],
+            ['Mid-April', '23-post calendar rolls; high-line items featured'],
+            ['Week of', 'Friendly reminder email to Rotarians after meeting'],
+            ['Event day', 'Facebook Live staffed, presenters front and center']
+          ]},
+          { h: 'Known failure mode', type: 'note', text: 'Ticket sales are always slow mid-season. Don\u2019t panic \u2014 the late push + auction opening drives the final numbers.' }
+        ]
+      },
+      'auction-rev': {
+        title: 'Silent Auction Revenue',
+        owner: 'Jerry Frasso · Auction Manager',
+        blocks: [
+          { h: 'Structure', type: 'list', items: [
+            'Silent auction opens April 1 on Emma site',
+            '"Buy now" disabled until April 1 launch',
+            'Featured items (4\u20135 premium lots) with QR codes for bidding anywhere',
+            'Live auction: historically underperforms \u2014 default to featured-only unless Chair approves'
+          ]},
+          { h: 'Featured items (candidates)', type: 'list', items: [
+            'Gems of Mexico',
+            'Bourbon Trail experience',
+            'Daytona 500 · 2027',
+            'Broadway Bound package',
+            'Four TVs donated by the AV vendor (price to match value)'
+          ]},
+          { h: 'Revenue rules', type: 'list', items: [
+            'Keep auction open until 9 PM if it rains \u2014 do not close early',
+            'Periodic announcements throughout the evening to maintain activity',
+            'Winner notifications + fulfillment coordination handled next day'
+          ]},
+          { h: 'Key deadlines', type: 'timeline', items: [
+            ['April 11', 'ALL auction items must be collected and uploaded'],
+            ['April 1', 'Auction opens publicly'],
+            ['Event week', 'Test end-to-end bidding flow; announce featured items on social'],
+            ['Event night 9:00 PM', 'Auction close (or later if raining)']
+          ]}
+        ]
+      }
+    }
+  },
+  {
+    id: 'marketing',
+    eyebrow: '§ II · The Word',
+    title: 'Marketing, Web & Media',
+    lede: 'Drives ticket sales, sponsor visibility, and the brand. If sponsors are the engine, this is the fuel line — logos, posts, postcards, video.',
+    stats: [
+      { n: '23', l: 'Scheduled posts' },
+      { n: '50', l: 'Posters' },
+      { n: '1', l: 'Emma site' }
+    ],
+    subs: [
+      { id: 'website', label: 'Website & Emma', owner: 'Website Lead' },
+      { id: 'social', label: 'Social Media', owner: 'Doug LeBlanc' },
+      { id: 'print', label: 'Print & Signage', owner: 'Print Lead' },
+      { id: 'video', label: 'Video & Filming', owner: 'Video Lead' },
+      { id: 'brand', label: 'Brand & Logos', owner: 'Marketing Lead' }
+    ],
+    content: {
+      website: {
+        title: 'Website & Emma Platform',
+        owner: 'Website / Emma Lead',
+        blocks: [
+          { h: 'What Emma handles', type: 'list', items: [
+            'Ticket sales with referring-Rotarian field',
+            'Sponsorship forms (all seven tiers) with auto-confirmation emails',
+            'Auction item pages + featured item QR targets',
+            'Logistics page (password-protected): day-of map, role assignments, timing'
+          ]},
+          { h: 'Live URLs', type: 'kv', items: [
+            ['Public site', 'forsythdownandderby.com'],
+            ['Facebook', 'Rotary Club of Lanier Forsyth'],
+            ['Committee logistics', '(password-gated page on Emma)'],
+            ['Sponsor contact', 'sedioron77@gmail.com · 678-983-4083']
+          ]},
+          { h: 'QA checklist before auction launch', type: 'list', items: [
+            'All 7 sponsor tiers tested with a test card',
+            'Ticket confirmation email fires + includes event details',
+            'Auction bid flow end-to-end on mobile',
+            'Featured item QR codes resolve to correct auction pages',
+            'Logistics page password works from fresh browser'
+          ]},
+          { h: 'Why we moved to Emma', type: 'note', text: 'Emma handles ticket sales, sponsorships, and registration with automatic confirmation emails. Replaced Give/G for efficiency. Derek and Peter built the integration.' }
+        ]
+      },
+      social: {
+        title: 'Social Media',
+        owner: 'Doug LeBlanc',
+        blocks: [
+          { h: 'Channels & cadence', type: 'list', items: [
+            'LinkedIn — institutional, sponsor recognition, regional-leader reach',
+            'Facebook — club + community, auction pushes',
+            'Instagram — behind-the-scenes, event-day reels',
+            '23-post calendar planned for the season'
+          ]},
+          { h: 'Engagement targets', type: 'kv', items: [
+            ['Key video', '400+ views over one minute'],
+            ['Auction-open post', 'High-line items featured'],
+            ['Event-day coverage', 'Facebook Live staffed (presenters front and center)'],
+            ['Partner shares', 'Sample post text sent to non-profit chairs']
+          ]},
+          { h: 'Post calendar milestones', type: 'timeline', items: [
+            ['Early April', 'Auction open announcement'],
+            ['Weekly', 'Sponsor spotlights (start with top tiers)'],
+            ['T\u221210 days', 'High-line auction items'],
+            ['T\u22127 days', 'Ticket push reminder'],
+            ['Event day', 'Live posts, reels, stories'],
+            ['Post-event', 'Thank-you recap with raised amount']
+          ]}
+        ]
+      },
+      print: {
+        title: 'Print & Signage',
+        owner: 'Print Lead',
+        blocks: [
+          { h: 'Print run inventory', type: 'list', items: [
+            'Postcards \u2014 updated with new date, QR code, logo (version 26)',
+            'Window posters \u2014 for local distribution',
+            '8.5\u00d711 sponsor sheets with format requirements',
+            '50 full-size posters (request to Derek) for Halcyon, City Center',
+            'Day-of signage \u2014 parking, games (5\u20139 PM), auction stations'
+          ]},
+          { h: 'Hand-offs in', type: 'list', items: [
+            'Final logos in correct format from Sponsorship (2 weeks before first print run)',
+            'Final QR codes from Website/Emma (before postcard run)',
+            'Final site map from Event Ops (2 weeks before event)'
+          ]},
+          { h: 'Known failure mode', type: 'note', text: 'A wrong QR on 50 posters is unrecoverable. QR verification is a blocker for print \u2014 no exceptions.' }
+        ]
+      },
+      video: {
+        title: 'Video & Filming',
+        owner: 'Video Lead',
+        blocks: [
+          { h: 'Shot list', type: 'list', items: [
+            'Sponsor check presentations at Rotary (top tiers get their own moment)',
+            'Beneficiary impact segments \u2014 the "why"',
+            'Rotarian testimonials',
+            'Event-day check hand-offs',
+            'Event sizzle / highlight reel'
+          ]},
+          { h: 'Filming day', type: 'timeline', items: [
+            ['T\u221230 days', 'Email list of charities, sponsors, coordinators for shoot scheduling'],
+            ['Friday shoot day', 'Sponsor check presentations + charity impact segments'],
+            ['Event week', 'Deliver event impact video link to Bill for Derby update PowerPoint'],
+            ['Event day', 'Capture live check presentations'],
+            ['Post-event', 'Highlight reel for next year\u2019s kickoff']
+          ]}
+        ]
+      },
+      brand: {
+        title: 'Brand & Logos',
+        owner: 'Marketing Lead',
+        blocks: [
+          { h: 'Brand elements', type: 'list', items: [
+            'Updated logo (version 26) \u2014 Forsyth Down & Derby crest',
+            'Palette: Rotary Azure #0050a2, Royal Blue #17458f, Rotary Gold #f7a81b (the jewel), Sky Blue #01b4e7',
+            'Typography: Open Sans + Open Sans Condensed (Rotary brand) + Playfair Display italic for display flourishes',
+            'Banner on forsythdownandderby.com using updated logo'
+          ]},
+          { h: 'Logo governance', type: 'list', items: [
+            'Rotary masterbrand signature + "Rotary Club of Lanier Forsyth" club signature for institutional contexts',
+            'Forsyth Down & Derby crest for event-specific contexts',
+            'Never mix wordmarks inside a single document',
+            'Rotary Gold is the "jewel" \u2014 use as accent, never as dominant color per Rotary brand center'
+          ]}
+        ]
+      }
+    }
+  },
+  {
+    id: 'ops',
+    eyebrow: '§ III · The Grounds',
+    title: 'Event Operations',
+    lede: 'The day-of experience. Parking, shuttles, volunteers, setup, audio, food and bar flow. Gets the least glory and causes the most chaos when it slips.',
+    stats: [
+      { n: '~400', l: 'Guests' },
+      { n: '41+9', l: 'Volunteers' },
+      { n: '4', l: 'Shuttles' }
+    ],
+    subs: [
+      { id: 'setup', label: 'Setup & Cleanup', owner: 'Event Ops Lead' },
+      { id: 'parking', label: 'Parking & Shuttles', owner: 'Jan Rooney' },
+      { id: 'volunteers', label: 'Volunteers', owner: 'Leah Knox' },
+      { id: 'audio', label: 'Audio & AV', owner: 'Robert + Doug' },
+      { id: 'food', label: 'Food & Bar Flow', owner: 'Food Lead' },
+      { id: 'runofshow', label: 'Day-of Run of Show', owner: 'Chair + Leads' }
+    ],
+    content: {
+      setup: {
+        title: 'Setup & Cleanup',
+        owner: 'Event Operations Lead',
+        blocks: [
+          { h: 'Scope', type: 'list', items: [
+            'Tents, tables, chairs, toilets \u2014 all booked',
+            'Stage + A/V positions mapped',
+            'Game stations laid out (5\u20139 PM operating window)',
+            'Sponsor signage placement',
+            'Trash and waste plan (two golf carts + drivers)'
+          ]},
+          { h: 'Setup timeline (event day)', type: 'timeline', items: [
+            ['Morning', 'Crew arrives; rentals delivered; tent raising'],
+            ['Early afternoon', 'Stage + A/V setup; sound check'],
+            ['Mid-afternoon', 'Game stations built; signage placed'],
+            ['T\u22122 hr (3:00 PM)', 'All setup complete; final walk-through'],
+            ['T\u221260 min (4:00 PM)', 'Volunteers arrive; briefing'],
+            ['5:00 PM', 'Doors open']
+          ]},
+          { h: 'Cleanup', type: 'list', items: [
+            'Volunteers available until 9:15 PM',
+            'Game stations close 9:00 PM sharp',
+            'Auction closes 9:00 PM (or later if raining)',
+            'Teardown by midnight',
+            'Rentals returned next day'
+          ]}
+        ]
+      },
+      parking: {
+        title: 'Parking & Shuttles',
+        owner: 'Jan Rooney · with Brian Cohen + Adam',
+        blocks: [
+          { h: 'The setup', type: 'list', items: [
+            'Four shuttles (Lauren\u2019s / David\u2019s) \u2014 zero wait goal',
+            'Self-parking $50 \u2014 tickets sold at Bill\u2019s barn',
+            'Uber-style ride-scheduling link for attendees',
+            'Insurance confirmed for event liability'
+          ]},
+          { h: 'Internal transport', type: 'list', items: [
+            'Four golf carts confirmed + drivers',
+            'Third cart needs driver (Adam working on it)',
+            'Golf cart parked at Doc\u2019s house \u2014 verify driver with Brian Cohen',
+            'Stephen Doiron\u2019s enclosed trailer hauls additional carts to site',
+            'Doug LeBlanc cart on standby'
+          ]},
+          { h: 'Deliverable', type: 'note', text: 'Publish parking map showing shuttle stops, self-parking at Bill\u2019s barn, and ticket prices \u2014 before Derby week. Map goes on the public site and the committee logistics page.' }
+        ]
+      },
+      volunteers: {
+        title: 'Volunteer Coordination',
+        owner: 'Leah Knox',
+        blocks: [
+          { h: 'The ask', type: 'kv', items: [
+            ['Rotarian volunteers', '41+ needed'],
+            ['Non-profit volunteers', '9+ needed'],
+            ['Evening shifts', 'Shortened (three shifts vs. one long block)'],
+            ['End time', 'All volunteers available until 9:15 PM']
+          ]},
+          { h: 'Shift strategy', type: 'list', items: [
+            'Three shorter evening shifts instead of one long block \u2014 easier to staff',
+            'Game volunteer leads contact their non-profit contacts directly',
+            'Non-profits route to non-profit events (not Rotarian roles)',
+            'Post 5:00\u20139:00 PM activity end-time signs at every game location'
+          ]},
+          { h: 'Day-of flow', type: 'timeline', items: [
+            ['4:00 PM', 'Volunteer check-in station opens'],
+            ['4:30 PM', 'Brief by station'],
+            ['5:00 PM', 'Doors open'],
+            ['Mid-event', 'Floating re-assignments as needed'],
+            ['9:00 PM', 'Game stations close; volunteers assist with breakdown'],
+            ['9:15 PM', 'Volunteers released']
+          ]}
+        ]
+      },
+      audio: {
+        title: 'Audio & AV',
+        owner: 'Robert (primary) · Doug LeBlanc (support)',
+        blocks: [
+          { h: 'Coverage requirements', type: 'list', items: [
+            'Background music across full property (no dead zones)',
+            'Mic capability for auction announcements (periodic)',
+            'Stage A/V for sponsor recognition + beneficiary moments',
+            'Projected screen: dedicated slide per sponsor rotating throughout'
+          ]},
+          { h: 'The race-start problem', type: 'note', text: 'Historic pain point: guests don\u2019t know when the Derby race starts. Solution: trumpet/bugle cue for race start \u2014 confirm availability and practice. A/V covers the call.' },
+          { h: 'Pre-event', type: 'timeline', items: [
+            ['Early', 'Walk the venue with Robert; identify coverage gaps'],
+            ['Pre-event', 'Confirm gear list + placement map'],
+            ['Event week', 'Coordinate with Doug on any band audio handoffs'],
+            ['Event day morning', 'Setup + full sound check before guests arrive']
+          ]}
+        ]
+      },
+      food: {
+        title: 'Food & Bar Flow',
+        owner: 'Food & Bar Lead',
+        blocks: [
+          { h: 'The 2025 lessons', type: 'list', items: [
+            'Food + drink + people were the hits \u2014 keep the level',
+            'Bar + food in the same pinch point killed flow',
+            'Pool area underused \u2014 leverage for more space',
+            'Consider relocating bourbon bar + food setup'
+          ]},
+          { h: 'Bourbon bar', type: 'list', items: [
+            'Top tiers: bourbon bar wristbands bundled in sponsor packages',
+            'Presenting Title = 15 wristbands',
+            'Triple Crown = 10 · Diamond = 8 · Platinum = 5 · Gold = 4',
+            'Additional wristbands sold as ticket add-on'
+          ]},
+          { h: 'Layout guidance', type: 'note', text: 'Redesign flow so food + bar are not in the same pinch. Use the pool area. Charcuterie layout should invite browsing, not bottleneck it. Walk layout with Event Ops + Parking leads two weeks out.' }
+        ]
+      },
+      runofshow: {
+        title: 'Day-of Run of Show',
+        owner: 'Chair + Event Ops Lead',
+        blocks: [
+          { h: 'Hour-by-hour', type: 'timeline', items: [
+            ['3:00 PM', 'All setup complete · final walk-through'],
+            ['4:00 PM', 'Volunteer check-in + briefing'],
+            ['5:00 PM', 'Doors open · shuttles running · Facebook Live on'],
+            ['5:30 PM', 'Guests arriving · games active · auction bidding'],
+            ['6:30 PM', 'Food service peak · bar active'],
+            ['6:50 PM', 'Trumpet/bugle cue · Kentucky Derby race call'],
+            ['7:15 PM', 'Sponsor recognition + beneficiary moment on stage'],
+            ['8:30 PM', 'Final auction push announcements'],
+            ['9:00 PM', 'Games close · auction closes (later if rain)'],
+            ['9:15 PM', 'Volunteers released'],
+            ['10:00 PM', 'Event ends · cleanup begins']
+          ]},
+          { h: 'Command posture', type: 'note', text: 'Chair remains mobile \u2014 no fixed station. Leads own their zones. Jockeys float and route bottlenecks. Secretary captures attendance.' }
+        ]
+      }
+    }
+  },
+  {
+    id: 'auction',
+    eyebrow: '§ IV · The Stakes',
+    title: 'Auction & Games',
+    lede: 'Guest experience. Silent auction, featured items, game stations (wine toss, velcro golf, BB range, duck race, Plank-o-Dart), prizes, and possibly a betting board.',
+    stats: [
+      { n: '~150', l: 'Auction items target' },
+      { n: '5', l: 'Featured items' },
+      { n: '5', l: 'Active game stations' }
+    ],
+    subs: [
+      { id: 'silent', label: 'Silent Auction', owner: 'Jerry Frasso' },
+      { id: 'featured', label: 'Featured Items', owner: 'Jerry Frasso' },
+      { id: 'intake', label: 'Item Intake', owner: 'Item Intake Lead' },
+      { id: 'games', label: 'Game Stations', owner: 'Games Leads' },
+      { id: 'prizes', label: 'Prize Sourcing', owner: 'Prize Lead' },
+      { id: 'squares', label: 'Betting Board', owner: 'Mike Cartwright + Daniel' }
+    ],
+    content: {
+      silent: {
+        title: 'Silent Auction',
+        owner: 'Jerry Frasso · Auction Manager',
+        blocks: [
+          { h: 'The rules', type: 'list', items: [
+            'Auction opens April 1 publicly',
+            '"Buy now" disabled until April 1 launch',
+            'Auction closes 9:00 PM event night',
+            'If it rains \u2014 auction stays open past 9:00 PM. Do not close early.',
+            'Periodic announcements throughout to keep bidding active'
+          ]},
+          { h: 'Platform', type: 'kv', items: [
+            ['Platform', 'Emma (integrated with ticketing)'],
+            ['Contract', 'Packages / Raiseaway \u2014 signed + faxed'],
+            ['Bidder access', 'Anywhere bidding via QR codes on featured items'],
+            ['Winner fulfillment', 'Next day + shipping coordination']
+          ]}
+        ]
+      },
+      featured: {
+        title: 'Featured Items',
+        owner: 'Jerry Frasso',
+        blocks: [
+          { h: 'Featured item candidates', type: 'list', items: [
+            'Gems of Mexico',
+            'Bourbon Trail experience',
+            'Daytona 500 \u00b7 2027',
+            'Broadway Bound package',
+            'Four TVs donated by AV vendor (price to match market value)'
+          ]},
+          { h: 'Live auction question', type: 'note', text: 'Live auctions historically underperform at this event and pull attention away from the silent auction where the money actually is. Default: featured items with QR codes for anywhere-bidding + periodic announcements. Only go live with Chair approval.' },
+          { h: 'QR deployment', type: 'list', items: [
+            'Each featured item gets a printed QR card at its display',
+            'QR cards also posted around the event (request to Dan Roan)',
+            'Scans land directly on the item\u2019s auction page',
+            'Bid from phone without being at the item'
+          ]}
+        ]
+      },
+      intake: {
+        title: 'Item Intake',
+        owner: 'Item Intake Lead',
+        blocks: [
+          { h: 'Cutoff', type: 'note', text: 'All auction items must be collected, photographed, valued, and uploaded by April 11 to make the April 1 launch window. Late items lose visibility.' },
+          { h: 'Process', type: 'list', items: [
+            'Publish item request list + donor outreach template (kickoff)',
+            'Visit donors \u00b7 pick up \u00b7 log item + value + photo',
+            'Hand to Auction Manager for upload',
+            'Thank-you note sent after event with sale result'
+          ]},
+          { h: 'Donor coordination', type: 'list', items: [
+            'Casa Nueva (Roy Ann) \u2014 move dinner fundraiser date if it conflicts with company open house',
+            'AV vendor \u2014 four donated TVs',
+            'Makers\u2019 Mark \u2014 custom-labeled bottles (photos on file for potential reuse)',
+            'Animal hospital (Doc) \u2014 gift certificates for games + auction'
+          ]}
+        ]
+      },
+      games: {
+        title: 'Game Stations',
+        owner: 'Games Leads (one per game)',
+        blocks: [
+          { h: 'Active stations', type: 'list', items: [
+            'Wine toss \u2014 two tables already set up',
+            'Velcro golf',
+            'BB gun range',
+            'Duck race',
+            'Plank-o-Dart (donated) \u2014 decide on placement'
+          ]},
+          { h: 'Operating window', type: 'kv', items: [
+            ['Start', '5:00 PM'],
+            ['End', '9:00 PM'],
+            ['Signage', 'Every game posts its 5\u20139 PM hours'],
+            ['Prize handout', 'At station during operating hours']
+          ]},
+          { h: 'Per-game owner responsibilities', type: 'list', items: [
+            'Commit to a station at kickoff',
+            'Estimate prize quantity + type',
+            'Confirm supplies + volunteers',
+            'Final prize acquisition (event week)',
+            'Run station 5\u20139 PM',
+            'Report revenue, popularity, lessons learned after event'
+          ]}
+        ]
+      },
+      prizes: {
+        title: 'Prize Sourcing',
+        owner: 'Prize Lead (currently fuzzy \u2014 assign explicitly)',
+        blocks: [
+          { h: 'The mandate', type: 'note', text: 'Prize decisions kept bouncing between Auction Manager, Game Leads, and Chair. Prize Sourcing is the single owner. Auction Manager approves the overall strategy.' },
+          { h: 'Prize inventory', type: 'list', items: [
+            'Gift cards \u2014 broken-up higher-value certificates ($100 from animal hospital w/ Doc approval)',
+            'Makers\u2019 Mark custom-labeled bottles (photos to Jan + Derek)',
+            'Donated items pulled from auction overflow',
+            'No pet-themed baskets \u2014 break up into gift cards instead'
+          ]},
+          { h: 'Timeline', type: 'timeline', items: [
+            ['Kickoff', 'Build master prize list; assign quantities per game'],
+            ['Pre-event', 'Approach prior donors; confirm commitments'],
+            ['T\u221221 days', 'All prizes locked \u2014 no event-day scramble'],
+            ['Event week', 'Sort, label, deliver to each Game Lead'],
+            ['Event day', 'On-call for prize issues only']
+          ]}
+        ]
+      },
+      squares: {
+        title: 'Betting Board (Squares)',
+        owner: 'Mike Cartwright + Daniel',
+        blocks: [
+          { h: 'Status', type: 'note', text: 'Decision pending: will the Derby betting board ("squares" game) run this year? Mike Cartwright + Daniel confirm, then send requirements to Derek for printing.' },
+          { h: 'If confirmed', type: 'list', items: [
+            'Identify on-site manager',
+            'Send final requirements to Derek for printing',
+            'Determine square pricing + payout structure',
+            'Station location on the grounds'
+          ]}
+        ]
+      }
+    }
+  }
+];
+
+/* ====================================================
+   GATE
+   ==================================================== */
+// Passphrase is intentionally simple — committee password, not a security boundary.
+// Change this by editing the PASSPHRASE constant before deploying.
+const PASSPHRASE = 'derby2026';
+
+const gate = document.getElementById('gate');
+const gateInput = document.getElementById('gate-input');
+const gateBtn = document.getElementById('gate-btn');
+const gateError = document.getElementById('gate-error');
+const app = document.getElementById('app');
+
+function tryUnlock() {
+  const val = gateInput.value.trim().toLowerCase();
+  if (val === PASSPHRASE.toLowerCase()) {
+    sessionStorage.setItem('derby_unlocked', '1');
+    unlock();
+  } else {
+    gateError.textContent = 'Wrong passphrase. Ask the Chair or a jockey.';
+    gateInput.focus();
+    gateInput.select();
+  }
+}
+
+function unlock() {
+  gate.classList.add('hidden');
+  app.style.display = 'block';
+  // Kick off animations now that app is visible
+  setTimeout(initDashboard, 50);
+}
+
+gateBtn.addEventListener('click', tryUnlock);
+gateInput.addEventListener('keydown', e => { if (e.key === 'Enter') tryUnlock(); });
+
+if (sessionStorage.getItem('derby_unlocked') === '1') {
+  unlock();
+}
+
+/* ====================================================
+   COUNTDOWN
+   ==================================================== */
+function updateCountdown() {
+  const target = new Date('2026-05-02T17:00:00-04:00').getTime();
+  const now = Date.now();
+  const diff = Math.max(0, target - now);
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+  const mins = Math.floor((diff / (1000 * 60)) % 60);
+  const d = document.getElementById('cd-days');
+  const h = document.getElementById('cd-hours');
+  const m = document.getElementById('cd-mins');
+  if (d) d.textContent = days;
+  if (h) h.textContent = String(hours).padStart(2, '0');
+  if (m) m.textContent = String(mins).padStart(2, '0');
+}
+setInterval(updateCountdown, 30000);
+updateCountdown();
+
+/* ====================================================
+   DASHBOARD
+   ==================================================== */
+function initDashboard() {
+  // Animate revenue bar (67K of 120K)
+  const revBar = document.getElementById('rev-bar');
+  if (revBar) {
+    requestAnimationFrame(() => {
+      revBar.style.width = ((67000 / 120000) * 100) + '%';
+    });
+  }
+  // Count up stream numbers
+  document.querySelectorAll('[data-count]').forEach(el => {
+    const target = parseInt(el.dataset.count, 10);
+    const duration = 1400;
+    const start = performance.now();
+    function step(now) {
+      const t = Math.min(1, (now - start) / duration);
+      const eased = 1 - Math.pow(1 - t, 3);
+      const val = Math.floor(target * eased);
+      el.textContent = '$' + val.toLocaleString();
+      if (t < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  });
+  // Animate stream bar fills
+  document.querySelectorAll('[data-pct]').forEach(el => {
+    setTimeout(() => { el.style.width = el.dataset.pct + '%'; }, 100);
+  });
+  // Count up percentage labels
+  document.querySelectorAll('[data-pct-label]').forEach(el => {
+    const target = parseFloat(el.dataset.pctLabel);
+    const duration = 1400;
+    const start = performance.now();
+    function step(now) {
+      const t = Math.min(1, (now - start) / duration);
+      const eased = 1 - Math.pow(1 - t, 3);
+      el.textContent = (target * eased).toFixed(0);
+      if (t < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  });
+
+  // Build workstream cards
+  const grid = document.getElementById('ws-grid');
+  grid.innerHTML = WORKSTREAMS.map((ws, i) => `
+    <div class="ws-card fade-up d${i+1}" data-ws="${ws.id}" tabindex="0" role="button" aria-label="Open ${ws.title}">
+      <div class="ws-card-head">
+        <div class="ws-card-eyebrow">${ws.eyebrow}</div>
+        <div class="ws-card-title">${ws.title}</div>
+        <div class="ws-card-lede">${ws.lede}</div>
+      </div>
+      <div class="ws-card-body">
+        <div class="ws-card-stats">
+          ${ws.stats.map(s => `
+            <div>
+              <div class="ws-stat-num">${s.n}</div>
+              <div class="ws-stat-label">${s.l}</div>
+            </div>
+          `).join('')}
+        </div>
+        <div class="ws-subs">
+          ${ws.subs.map(s => `
+            <div class="ws-sub-pill">
+              <span>${s.label}</span>
+              <span class="owner">${s.owner}</span>
+            </div>
+          `).join('')}
+        </div>
+        <div class="ws-card-cta">Enter workstream</div>
+      </div>
+    </div>
+  `).join('');
+
+  // Wire up card clicks
+  document.querySelectorAll('.ws-card').forEach(card => {
+    const open = () => openPanel(card.dataset.ws);
+    card.addEventListener('click', open);
+    card.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); }
+    });
+  });
+}
+
+/* ====================================================
+   PANEL
+   ==================================================== */
+const panel = document.getElementById('panel');
+const backdrop = document.getElementById('backdrop');
+const panelClose = document.getElementById('panel-close');
+
+function openPanel(wsId) {
+  const ws = WORKSTREAMS.find(w => w.id === wsId);
+  if (!ws) return;
+  document.getElementById('panel-eyebrow').textContent = ws.eyebrow;
+  document.getElementById('panel-title').textContent = ws.title;
+  document.getElementById('panel-lede').textContent = ws.lede;
+
+  // Build sub-tabs
+  const tabsEl = document.getElementById('sub-tabs');
+  tabsEl.innerHTML = ws.subs.map((s, i) => `
+    <button class="sub-tab ${i===0 ? 'active' : ''}" data-sub="${s.id}">${s.label}</button>
+  `).join('');
+
+  // Build sub-contents
+  const body = document.getElementById('panel-body');
+  body.innerHTML = ws.subs.map((s, i) => {
+    const c = ws.content[s.id];
+    if (!c) return `<div class="sub-content ${i===0 ? 'active' : ''}" data-sub="${s.id}"><h3>${s.label}</h3><p style="color:var(--ink-soft); font-style:italic;">Details coming soon.</p></div>`;
+    return `
+      <div class="sub-content ${i===0 ? 'active' : ''}" data-sub="${s.id}">
+        <h3>${c.title}</h3>
+        <div class="owner-line">${c.owner}</div>
+        ${(c.blocks || []).map(renderBlock).join('')}
+      </div>
+    `;
+  }).join('');
+
+  // Wire up tab clicks
+  tabsEl.querySelectorAll('.sub-tab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      tabsEl.querySelectorAll('.sub-tab').forEach(b => b.classList.remove('active'));
+      body.querySelectorAll('.sub-content').forEach(c => c.classList.remove('active'));
+      btn.classList.add('active');
+      const target = body.querySelector(`.sub-content[data-sub="${btn.dataset.sub}"]`);
+      if (target) target.classList.add('active');
+      // Scroll panel body to top on tab change
+      panel.scrollTop = 0;
+    });
+  });
+
+  panel.classList.add('open');
+  backdrop.classList.add('open');
+  panel.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+}
+
+function closePanel() {
+  panel.classList.remove('open');
+  backdrop.classList.remove('open');
+  panel.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+}
+
+panelClose.addEventListener('click', closePanel);
+backdrop.addEventListener('click', closePanel);
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && panel.classList.contains('open')) closePanel();
+});
+
+function renderBlock(b) {
+  if (b.type === 'list') {
+    return `<div class="info-block"><h4>${b.h}</h4><ul>${b.items.map(i => `<li>${i}</li>`).join('')}</ul></div>`;
+  }
+  if (b.type === 'kv') {
+    return `<div class="info-block"><h4>${b.h}</h4><div class="kv-grid">${b.items.map(([k,v]) => `<div class="kv-row"><div class="k">${k}</div><div class="v">${v}</div></div>`).join('')}</div></div>`;
+  }
+  if (b.type === 'timeline') {
+    return `<div class="info-block"><h4>${b.h}</h4><div class="timeline">${b.items.map(([w,what]) => `<div class="timeline-row"><div class="timeline-when">${w}</div><div class="timeline-what">${what}</div></div>`).join('')}</div></div>`;
+  }
+  if (b.type === 'note') {
+    return `<div class="info-block"><h4>${b.h}</h4><div class="note-card">${b.text}</div></div>`;
+  }
+  return '';
+}
+
+</script>
+</body>
+</html>
