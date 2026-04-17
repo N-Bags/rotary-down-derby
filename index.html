@@ -652,144 +652,166 @@ body {
 /* Two-column layout: sticky ToC left, content right */
 .detail-layout {
   display: grid;
-  grid-template-columns: 240px 1fr;
-  gap: 3rem;
-  align-items: start;
+/* Single-column — no sidebar, no sticky ToC.
+   Role cards collapse everything so the page is short. */
+.detail-layout {
+  display: block;
 }
 
-/* Sticky table-of-contents sidebar */
-.detail-toc {
-  position: sticky;
-  top: 2rem;
-  padding: 1.5rem 0;
-  border-top: 3px solid var(--detail-accent, var(--azure));
+/* Control bar above the role list: expand/collapse all */
+.role-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  margin-bottom: 1.5rem;
+  border-top: 2px solid var(--detail-accent, var(--azure));
+  border-bottom: 1px solid var(--rule);
+  flex-wrap: wrap;
+  gap: 1rem;
 }
-.detail-toc-label {
+.role-controls-label {
   font-family: 'Open Sans Condensed', 'Open Sans', sans-serif;
   font-weight: 700;
   font-size: 0.95rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--ink-soft);
-  margin-bottom: 1rem;
 }
-.toc-list {
-  list-style: none;
-  padding: 0;
+.role-controls-actions {
+  display: flex;
+  gap: 0.5rem;
 }
-.toc-item {
-  display: block;
-  padding: 0.85rem 0;
-  font-size: 1.05rem;
-  color: var(--ink);
-  text-decoration: none;
-  border-bottom: 1px solid var(--rule);
-  transition: color 0.15s, padding-left 0.15s;
-  cursor: pointer;
-  background: none;
-  border-left: none;
-  border-right: none;
-  border-top: none;
-  font-family: inherit;
-  width: 100%;
-  text-align: left;
-  line-height: 1.35;
-}
-.toc-item:hover {
+.role-ctrl-btn {
+  padding: 0.5rem 0.9rem;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  background: transparent;
   color: var(--detail-accent-text, var(--azure));
-  padding-left: 0.5rem;
-}
-.toc-item.active {
-  color: var(--detail-accent-text, var(--azure));
-  font-weight: 700;
-  padding-left: 0.5rem;
-}
-.toc-item .toc-num {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.85rem;
-  color: var(--ink-soft);
-  margin-right: 0.6rem;
-}
-.toc-item.active .toc-num { color: var(--detail-accent-text, var(--azure)); }
-
-/* Mobile jump menu (hidden on desktop) */
-.detail-jump {
-  display: none;
-  margin-bottom: 2rem;
-  padding: 1rem;
-  background: var(--bone);
-  border-radius: 4px;
-  border-left: 4px solid var(--detail-accent, var(--azure));
-}
-.detail-jump select {
-  width: 100%;
-  padding: 0.9rem 1rem;
-  font-family: inherit;
-  font-size: 1.05rem;
-  background: var(--cream);
   border: 1px solid var(--rule);
   border-radius: 3px;
-  color: var(--ink);
   cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+.role-ctrl-btn:hover {
+  background: var(--bone);
+  border-color: var(--detail-accent, var(--azure));
 }
 
-/* Each sub-section is now a stacked section with scroll-target */
-.detail-section {
-  padding-bottom: 3rem;
-  margin-bottom: 3rem;
-  border-bottom: 1px solid var(--rule);
-  scroll-margin-top: 2rem;
-}
-.detail-section:last-child {
-  border-bottom: none;
-  margin-bottom: 0;
-}
-.detail-section-header {
-  margin-bottom: 2rem;
-}
-.detail-section-num {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 1rem;
-  color: var(--detail-accent-text, var(--azure));
-  letter-spacing: 0.15em;
-  margin-bottom: 0.5rem;
-  display: block;
-}
-.detail-section-title {
-  font-family: 'Playfair Display', serif;
-  font-style: italic;
-  font-weight: 500;
-  font-size: 2.25rem;
-  line-height: 1.1;
-  color: var(--royal-deep);
+/* Role card — collapsed by default. Shows name + owner + one-line summary */
+.role-card {
+  background: var(--cream);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
   margin-bottom: 0.75rem;
+  overflow: hidden;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  scroll-margin-top: 1.5rem;
+}
+.role-card:hover { border-color: var(--detail-accent, var(--azure)); }
+.role-card.open {
+  border-color: var(--detail-accent, var(--azure));
+  box-shadow: 0 4px 20px rgba(12, 45, 102, 0.08);
+}
+
+.role-head {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 52px 1fr auto;
+  gap: 1rem;
+  align-items: center;
+  padding: 1.1rem 1.3rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  color: inherit;
+  transition: background 0.15s;
+}
+.role-head:hover { background: var(--bone); }
+.role-card.open .role-head {
+  background: var(--bone);
+  border-bottom: 1px solid var(--rule);
+}
+.role-num {
+  font-family: 'Open Sans Condensed', 'Open Sans', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  color: var(--detail-accent-text, var(--azure));
+  text-align: center;
+  padding: 0.35rem 0;
+  border-right: 2px solid var(--detail-accent, var(--azure));
+}
+.role-head-main {
+  min-width: 0;
+}
+.role-head-name {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--royal-deep);
+  line-height: 1.3;
+  margin-bottom: 0.2rem;
   letter-spacing: -0.01em;
 }
-.detail-section-owner {
+.role-head-owner {
+  font-size: 0.98rem;
+  color: var(--ink-soft);
+  line-height: 1.35;
+}
+.role-head-owner .owner-tag {
   display: inline-block;
-  padding: 0.35rem 0.85rem;
-  background: var(--bone);
-  border-left: 3px solid var(--detail-accent, var(--azure));
-  font-size: 1rem;
-  color: var(--ink);
-  font-weight: 500;
-  border-radius: 0 3px 3px 0;
+  font-family: 'Open Sans Condensed', 'Open Sans', sans-serif;
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--detail-accent-text, var(--azure));
+  margin-right: 0.5rem;
+}
+.role-chevron {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1.2rem;
+  color: var(--ink-soft);
+  transition: transform 0.25s, color 0.15s;
+  padding: 0.25rem 0.5rem;
+  line-height: 1;
+}
+.role-card.open .role-chevron {
+  transform: rotate(90deg);
+  color: var(--detail-accent-text, var(--azure));
 }
 
-/* Info blocks within sections — bumped up for readability */
+/* Collapsed body — hidden. Expanded — padded detail area. */
+.role-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.role-card.open .role-body {
+  max-height: 6000px; /* generous ceiling; 0.35s feels natural */
+}
+.role-body-inner {
+  padding: 1.75rem 1.5rem 1.5rem;
+}
+
+/* Info blocks inside role body — tighter since they're in a card */
 .info-block {
-  margin-bottom: 2.5rem;
+  margin-bottom: 1.75rem;
 }
 .info-block:last-child { margin-bottom: 0; }
 .info-block h4 {
   font-family: 'Open Sans Condensed', 'Open Sans', sans-serif;
   font-weight: 700;
-  font-size: 1rem;
+  font-size: 0.95rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--detail-accent-text, var(--azure));
-  margin-bottom: 1rem;
-  padding-bottom: 0.6rem;
+  margin-bottom: 0.85rem;
+  padding-bottom: 0.5rem;
   border-bottom: 1px solid var(--rule);
 }
 .info-block ul {
@@ -797,16 +819,16 @@ body {
   padding: 0;
 }
 .info-block ul li {
-  padding: 0.65rem 0 0.65rem 1.75rem;
+  padding: 0.55rem 0 0.55rem 1.5rem;
   position: relative;
-  line-height: 1.55;
-  font-size: 1.08rem;
+  line-height: 1.5;
+  font-size: 1.05rem;
 }
 .info-block ul li::before {
   content: '';
   position: absolute;
-  left: 0; top: 1.25rem;
-  width: 12px; height: 2px;
+  left: 0; top: 1.1rem;
+  width: 10px; height: 2px;
   background: var(--gold);
 }
 
@@ -970,12 +992,14 @@ body {
   .ws-grid { grid-template-columns: 1fr; }
   .event-info { grid-template-columns: 1fr; }
   .masthead-meta { gap: 1rem; font-size: 0.8rem; }
-  /* Detail view: single column + jump menu instead of sidebar ToC */
-  .detail-layout { grid-template-columns: 1fr; gap: 0; }
-  .detail-toc { display: none; }
-  .detail-jump { display: block; }
+  /* Detail view mobile tweaks */
   .detail-header-inner { padding-left: 1rem; }
   .detail-header::before { left: -1.25rem; }
+  .role-head { grid-template-columns: 44px 1fr auto; padding: 1rem 1rem; gap: 0.75rem; }
+  .role-head-name { font-size: 1.1rem; }
+  .role-head-owner { font-size: 0.92rem; }
+  .role-body-inner { padding: 1.25rem 1.1rem 1.1rem; }
+  .role-controls { flex-direction: column; align-items: flex-start; }
   .timeline-row { grid-template-columns: 110px 1fr; gap: 1rem; }
   .timeline-when { font-size: 0.85rem; }
   .kv-grid { grid-template-columns: 1fr; }
@@ -1166,23 +1190,19 @@ body {
   </header>
 
   <div class="detail-layout">
-    <aside class="detail-toc">
-      <div class="detail-toc-label">Sections</div>
-      <nav id="detail-toc-list" class="toc-list"></nav>
-    </aside>
-    <div class="detail-main">
-      <div class="detail-jump">
-        <select id="detail-jump-select" onchange="jumpToSection(this.value)">
-          <option value="">Jump to section…</option>
-        </select>
+    <div class="role-controls">
+      <div class="role-controls-label">Roles in this workstream</div>
+      <div class="role-controls-actions">
+        <button class="role-ctrl-btn" type="button" onclick="toggleAllRoles(true)">Expand all</button>
+        <button class="role-ctrl-btn" type="button" onclick="toggleAllRoles(false)">Collapse all</button>
       </div>
-      <div id="detail-sections"></div>
-      <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--rule);">
-        <button class="back-btn" type="button" onclick="closeDetail()">
-          <span class="arr">←</span>
-          <span>Back to dashboard</span>
-        </button>
-      </div>
+    </div>
+    <div id="role-list"></div>
+    <div style="margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--rule);">
+      <button class="back-btn" type="button" onclick="closeDetail()">
+        <span class="arr">←</span>
+        <span>Back to dashboard</span>
+      </button>
     </div>
   </div>
 </div>
@@ -1941,17 +1961,14 @@ function initDashboard() {
 }
 
 /* ====================================================
-   FULL-PAGE DETAIL VIEW + URL HASH ROUTING
+   FULL-PAGE DETAIL VIEW (role cards + URL hash routing)
    ==================================================== */
 const appEl = document.getElementById('app');
 const backBtn = document.getElementById('back-btn');
 const detailEyebrow = document.getElementById('detail-eyebrow');
 const detailTitle = document.getElementById('detail-title');
 const detailLede = document.getElementById('detail-lede');
-const detailHeader = document.getElementById('detail-header');
-const detailTocList = document.getElementById('detail-toc-list');
-const detailSections = document.getElementById('detail-sections');
-const detailJumpSelect = document.getElementById('detail-jump-select');
+const roleList = document.getElementById('role-list');
 
 // Map workstream id → accent colors (matches the card accents)
 const ACCENTS = {
@@ -1961,9 +1978,12 @@ const ACCENTS = {
   auction:      { accent: 'var(--sky)',        text: 'var(--royal)' }
 };
 
-function openDetail(wsId) {
+let currentWorkstream = null;
+
+function openDetail(wsId, roleId) {
   const ws = WORKSTREAMS.find(w => w.id === wsId);
   if (!ws) { closeDetail(); return; }
+  currentWorkstream = ws;
 
   // Apply accent colors via CSS custom properties on the detail view
   const accent = ACCENTS[wsId] || ACCENTS.sponsorships;
@@ -1976,116 +1996,132 @@ function openDetail(wsId) {
   detailTitle.textContent = ws.title;
   detailLede.textContent = ws.lede;
 
-  // Table of contents (desktop sidebar)
-  detailTocList.innerHTML = ws.subs.map((s, i) => `
-    <button class="toc-item" type="button" data-sub="${s.id}">
-      <span class="toc-num">${String(i+1).padStart(2,'0')}</span>${s.label}
-    </button>
-  `).join('');
-
-  // Mobile jump select
-  detailJumpSelect.innerHTML = '<option value="">Jump to section…</option>' +
-    ws.subs.map((s, i) => `<option value="${s.id}">${String(i+1).padStart(2,'0')} · ${s.label}</option>`).join('');
-
-  // Render stacked sections
-  detailSections.innerHTML = ws.subs.map((s, i) => {
+  // Build collapsed role cards
+  roleList.innerHTML = ws.subs.map((s, i) => {
     const c = ws.content[s.id];
     const num = String(i+1).padStart(2, '0');
-    if (!c) {
-      return `
-        <section class="detail-section" id="sec-${s.id}">
-          <div class="detail-section-header">
-            <span class="detail-section-num">§ ${num}</span>
-            <h2 class="detail-section-title">${s.label}</h2>
-            <div class="detail-section-owner">${s.owner}</div>
-          </div>
-          <p style="font-size: 1.08rem; color: var(--ink-soft); font-style: italic;">
-            Details coming soon. This section will be filled in as committee decisions are made.
-          </p>
-        </section>
-      `;
-    }
+    const ownerText = c ? c.owner : s.owner;
+    const name = c ? c.title : s.label;
+    const bodyContent = c
+      ? (c.blocks || []).map(renderBlock).join('')
+      : `<p style="font-size: 1.05rem; color: var(--ink-soft); font-style: italic;">Details coming soon.</p>`;
+
     return `
-      <section class="detail-section" id="sec-${s.id}">
-        <div class="detail-section-header">
-          <span class="detail-section-num">§ ${num}</span>
-          <h2 class="detail-section-title">${c.title}</h2>
-          <div class="detail-section-owner">${c.owner}</div>
+      <div class="role-card" id="role-${s.id}" data-role="${s.id}">
+        <button class="role-head" type="button" onclick="toggleRole('${s.id}')" aria-expanded="false">
+          <div class="role-num">${num}</div>
+          <div class="role-head-main">
+            <div class="role-head-name">${name}</div>
+            <div class="role-head-owner"><span class="owner-tag">Owner</span>${ownerText}</div>
+          </div>
+          <div class="role-chevron" aria-hidden="true">›</div>
+        </button>
+        <div class="role-body">
+          <div class="role-body-inner">
+            ${bodyContent}
+          </div>
         </div>
-        ${(c.blocks || []).map(renderBlock).join('')}
-      </section>
+      </div>
     `;
   }).join('');
-
-  // Wire up ToC clicks — smooth scroll to section
-  detailTocList.querySelectorAll('.toc-item').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const target = document.getElementById('sec-' + btn.dataset.sub);
-      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
-  });
 
   // Swap views
   appEl.classList.add('show-detail');
   window.scrollTo({ top: 0, behavior: 'auto' });
 
-  // Set up scroll-spy to highlight active ToC item
-  setupScrollSpy(ws);
+  // If a specific role was requested in the hash, expand and scroll to it
+  if (roleId) {
+    // Wait a tick for layout, then expand + scroll
+    setTimeout(() => {
+      const card = document.getElementById('role-' + roleId);
+      if (card) {
+        expandRole(roleId);
+        card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 80);
+  }
 }
 
 function closeDetail() {
   if (location.hash) {
-    // Using replaceState so the back button doesn't cycle through workstream hashes
     history.pushState('', document.title, window.location.pathname + window.location.search);
   }
   appEl.classList.remove('show-detail');
-  teardownScrollSpy();
+  currentWorkstream = null;
   window.scrollTo({ top: 0, behavior: 'auto' });
 }
 
-function jumpToSection(subId) {
-  if (!subId) return;
-  const target = document.getElementById('sec-' + subId);
-  if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  // Reset the select so it works if they pick the same option twice
-  detailJumpSelect.value = '';
+function expandRole(roleId) {
+  const card = document.getElementById('role-' + roleId);
+  if (!card) return;
+  card.classList.add('open');
+  const btn = card.querySelector('.role-head');
+  if (btn) btn.setAttribute('aria-expanded', 'true');
 }
 
-// Scroll-spy: observe which section is visible, highlight its ToC item
-let scrollSpyObserver = null;
-function setupScrollSpy(ws) {
-  teardownScrollSpy();
-  const options = {
-    rootMargin: '-20% 0px -60% 0px',
-    threshold: 0
-  };
-  scrollSpyObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const id = entry.target.id.replace('sec-', '');
-        detailTocList.querySelectorAll('.toc-item').forEach(b => {
-          b.classList.toggle('active', b.dataset.sub === id);
-        });
-      }
-    });
-  }, options);
-  ws.subs.forEach(s => {
-    const el = document.getElementById('sec-' + s.id);
-    if (el) scrollSpyObserver.observe(el);
+function collapseRole(roleId) {
+  const card = document.getElementById('role-' + roleId);
+  if (!card) return;
+  card.classList.remove('open');
+  const btn = card.querySelector('.role-head');
+  if (btn) btn.setAttribute('aria-expanded', 'false');
+}
+
+function toggleRole(roleId) {
+  const card = document.getElementById('role-' + roleId);
+  if (!card) return;
+  const isOpen = card.classList.contains('open');
+  if (isOpen) {
+    collapseRole(roleId);
+    // Clean role from URL hash if it's currently selected
+    if (location.hash.includes('/')) {
+      const wsId = location.hash.replace(/^#/, '').split('/')[0];
+      history.replaceState('', document.title, '#' + wsId);
+    }
+  } else {
+    expandRole(roleId);
+    // Update URL with role so it's shareable
+    if (currentWorkstream) {
+      history.replaceState('', document.title, '#' + currentWorkstream.id + '/' + roleId);
+    }
+  }
+}
+
+function toggleAllRoles(openAll) {
+  if (!currentWorkstream) return;
+  currentWorkstream.subs.forEach(s => {
+    if (openAll) expandRole(s.id);
+    else collapseRole(s.id);
   });
-}
-function teardownScrollSpy() {
-  if (scrollSpyObserver) { scrollSpyObserver.disconnect(); scrollSpyObserver = null; }
+  // Clean role from URL (we're in bulk mode, not a single-role anchor)
+  if (currentWorkstream) {
+    history.replaceState('', document.title, '#' + currentWorkstream.id);
+  }
 }
 
-// Route based on hash
+// Route based on hash. Supports #workstream and #workstream/role
 function handleRoute() {
   const hash = location.hash.replace(/^#/, '');
-  if (hash && WORKSTREAMS.find(w => w.id === hash)) {
-    openDetail(hash);
+  if (!hash) {
+    appEl.classList.remove('show-detail');
+    currentWorkstream = null;
+    return;
+  }
+  const [wsId, roleId] = hash.split('/');
+  if (WORKSTREAMS.find(w => w.id === wsId)) {
+    // If we're already on this workstream and just changing role, expand without re-render
+    if (currentWorkstream && currentWorkstream.id === wsId) {
+      if (roleId) {
+        expandRole(roleId);
+        const card = document.getElementById('role-' + roleId);
+        if (card) card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    } else {
+      openDetail(wsId, roleId);
+    }
   } else {
     appEl.classList.remove('show-detail');
-    teardownScrollSpy();
+    currentWorkstream = null;
   }
 }
 
