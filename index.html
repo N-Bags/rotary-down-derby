@@ -30,8 +30,8 @@
   --bone: #ede9df;
   --bone-dark: #d8d2c4;
   --ink: #1a1a1a;
-  --ink-soft: #4a4a4a;
-  --rule: #d4d7de;
+  --ink-soft: #3a3a3a;
+  --rule: #c8ccd4;
   --shadow: 0 20px 60px rgba(12, 45, 102, 0.18);
   --shadow-sm: 0 4px 20px rgba(12, 45, 102, 0.08);
 }
@@ -42,8 +42,8 @@ html, body {
   font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
   background: var(--cream);
   color: var(--ink);
-  font-size: 17px;
-  line-height: 1.55;
+  font-size: 19px;
+  line-height: 1.65;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
 }
@@ -560,149 +560,236 @@ body {
 }
 .ws-card:hover .ws-card-cta::after { transform: translateX(4px); }
 
-/* ============== DETAIL PANEL ============== */
-.panel-backdrop {
-  position: fixed; inset: 0;
-  background: rgba(12, 45, 102, 0.55);
-  backdrop-filter: blur(4px);
-  opacity: 0; visibility: hidden;
-  transition: opacity 0.3s, visibility 0.3s;
-  z-index: 100;
-}
-.panel-backdrop.open { opacity: 1; visibility: visible; }
+/* ============== FULL-PAGE WORKSTREAM VIEW ============== */
+/* Replaces the slide-in panel. Dashboard and detail view are
+   swapped via .show-detail class on .app — simple, URL-driven,
+   no modal/overlay. */
 
-.panel {
-  position: fixed;
-  top: 0; right: 0; bottom: 0;
-  width: min(760px, 100%);
-  background: var(--cream);
-  box-shadow: -20px 0 60px rgba(12, 45, 102, 0.25);
-  transform: translateX(100%);
-  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  z-index: 101;
-  overflow-y: auto;
-  display: flex; flex-direction: column;
+.detail-view {
+  display: none;
+  animation: pageIn 0.3s ease;
 }
-.panel.open { transform: translateX(0); }
+.app.show-detail .dashboard-view { display: none; }
+.app.show-detail .detail-view { display: block; }
+@keyframes pageIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
-.panel-head {
-  padding: 2rem 2.5rem 1.75rem;
+/* Back button — unmissable, left-aligned, generous hit target */
+.back-bar {
+  padding: 1.5rem 0 1rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--rule);
+}
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.9rem 1.5rem 0.9rem 1.2rem;
   background: var(--royal-deep);
   color: var(--bone);
-  position: sticky; top: 0; z-index: 2;
-  border-bottom: 3px solid var(--gold);
-}
-.panel-close {
-  position: absolute;
-  top: 1.25rem; right: 1.5rem;
-  background: transparent;
-  border: 1px solid rgba(245, 240, 230, 0.3);
-  color: var(--bone);
-  width: 36px; height: 36px;
-  border-radius: 50%;
-  font-size: 1.1rem;
-  cursor: pointer;
-  transition: background 0.2s, border-color 0.2s;
-  font-family: 'JetBrains Mono', monospace;
-}
-.panel-close:hover {
-  background: rgba(245, 240, 230, 0.1);
-  border-color: var(--gold-deep);
-}
-.panel-eyebrow {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.7rem;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: var(--gold-deep);
-  margin-bottom: 0.5rem;
-}
-.panel-title {
-  font-family: 'Playfair Display', serif;
-  font-weight: 500;
-  font-style: italic;
-  font-size: 2.5rem;
-  line-height: 1;
-  margin-bottom: 0.5rem;
-}
-.panel-lede {
+  border: none;
   font-family: 'Open Sans', sans-serif;
-  font-size: 1.1rem;
-  color: rgba(245, 240, 230, 0.8);
-  line-height: 1.45;
-  max-width: 52ch;
+  font-weight: 600;
+  font-size: 1.05rem;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.15s, transform 0.1s;
+  text-decoration: none;
+}
+.back-btn:hover { background: var(--royal); }
+.back-btn:active { transform: translateY(1px); }
+.back-btn .arr {
+  font-size: 1.3rem;
+  line-height: 1;
+  transition: transform 0.15s;
+}
+.back-btn:hover .arr { transform: translateX(-3px); }
+
+/* Detail page header — big, clear, with accent color stripe */
+.detail-header {
+  padding: 2rem 0 2.5rem;
+  border-bottom: 2px solid var(--rule);
+  margin-bottom: 3rem;
+  position: relative;
+}
+.detail-header::before {
+  content: '';
+  position: absolute;
+  top: 2rem; left: 0;
+  width: 6px; height: 64px;
+  background: var(--detail-accent, var(--azure));
+  border-radius: 3px;
+}
+.detail-header-inner { padding-left: 1.75rem; }
+.detail-eyebrow {
+  font-family: 'Open Sans Condensed', 'Open Sans', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--detail-accent-text, var(--azure));
+  margin-bottom: 0.75rem;
+}
+.detail-title {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(2.5rem, 5vw, 3.75rem);
+  line-height: 1;
+  color: var(--royal-deep);
+  margin-bottom: 1rem;
+  letter-spacing: -0.01em;
+}
+.detail-lede {
+  font-size: 1.25rem;
+  line-height: 1.55;
+  color: var(--ink);
+  max-width: 60ch;
 }
 
-.panel-body { padding: 0 2.5rem 3rem; }
+/* Two-column layout: sticky ToC left, content right */
+.detail-layout {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 3rem;
+  align-items: start;
+}
 
-/* Sub-section nav within panel */
-.sub-tabs {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0;
-  border-bottom: 1px solid var(--rule);
-  margin: 0 -2.5rem 2rem;
-  padding: 0 2.5rem;
+/* Sticky table-of-contents sidebar */
+.detail-toc {
   position: sticky;
-  top: 180px;
-  background: var(--cream);
-  z-index: 1;
+  top: 2rem;
+  padding: 1.5rem 0;
+  border-top: 3px solid var(--detail-accent, var(--azure));
 }
-.sub-tab {
-  padding: 1rem 0;
-  margin-right: 1.75rem;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.72rem;
-  letter-spacing: 0.2em;
+.detail-toc-label {
+  font-family: 'Open Sans Condensed', 'Open Sans', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--ink-soft);
+  margin-bottom: 1rem;
+}
+.toc-list {
+  list-style: none;
+  padding: 0;
+}
+.toc-item {
+  display: block;
+  padding: 0.85rem 0;
+  font-size: 1.05rem;
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule);
+  transition: color 0.15s, padding-left 0.15s;
   cursor: pointer;
   background: none;
-  border: none;
-  border-bottom: 2px solid transparent;
-  transition: color 0.15s, border-color 0.15s;
-  margin-bottom: -1px;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  font-family: inherit;
+  width: 100%;
+  text-align: left;
+  line-height: 1.35;
 }
-.sub-tab:hover { color: var(--royal-deep); }
-.sub-tab.active {
-  color: var(--royal-deep);
-  border-bottom-color: var(--gold-deep);
+.toc-item:hover {
+  color: var(--detail-accent-text, var(--azure));
+  padding-left: 0.5rem;
+}
+.toc-item.active {
+  color: var(--detail-accent-text, var(--azure));
+  font-weight: 700;
+  padding-left: 0.5rem;
+}
+.toc-item .toc-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  margin-right: 0.6rem;
+}
+.toc-item.active .toc-num { color: var(--detail-accent-text, var(--azure)); }
+
+/* Mobile jump menu (hidden on desktop) */
+.detail-jump {
+  display: none;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  background: var(--bone);
+  border-radius: 4px;
+  border-left: 4px solid var(--detail-accent, var(--azure));
+}
+.detail-jump select {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  font-family: inherit;
+  font-size: 1.05rem;
+  background: var(--cream);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  color: var(--ink);
+  cursor: pointer;
 }
 
-.sub-content { display: none; }
-.sub-content.active { display: block; animation: fade 0.3s ease; }
-@keyframes fade { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
-
-.sub-content h3 {
+/* Each sub-section is now a stacked section with scroll-target */
+.detail-section {
+  padding-bottom: 3rem;
+  margin-bottom: 3rem;
+  border-bottom: 1px solid var(--rule);
+  scroll-margin-top: 2rem;
+}
+.detail-section:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+.detail-section-header {
+  margin-bottom: 2rem;
+}
+.detail-section-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1rem;
+  color: var(--detail-accent-text, var(--azure));
+  letter-spacing: 0.15em;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+.detail-section-title {
   font-family: 'Playfair Display', serif;
   font-style: italic;
   font-weight: 500;
-  font-size: 1.75rem;
+  font-size: 2.25rem;
+  line-height: 1.1;
   color: var(--royal-deep);
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.01em;
 }
-.sub-content .owner-line {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.75rem;
-  color: var(--gold-deep);
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  margin-bottom: 1.5rem;
+.detail-section-owner {
+  display: inline-block;
+  padding: 0.35rem 0.85rem;
+  background: var(--bone);
+  border-left: 3px solid var(--detail-accent, var(--azure));
+  font-size: 1rem;
+  color: var(--ink);
+  font-weight: 500;
+  border-radius: 0 3px 3px 0;
 }
 
-/* Info blocks in sub-content */
+/* Info blocks within sections — bumped up for readability */
 .info-block {
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
 }
+.info-block:last-child { margin-bottom: 0; }
 .info-block h4 {
   font-family: 'Open Sans Condensed', 'Open Sans', sans-serif;
   font-weight: 700;
-  font-size: 0.85rem;
-  letter-spacing: 0.25em;
+  font-size: 1rem;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--azure);
-  margin-bottom: 0.85rem;
-  padding-bottom: 0.5rem;
+  color: var(--detail-accent-text, var(--azure));
+  margin-bottom: 1rem;
+  padding-bottom: 0.6rem;
   border-bottom: 1px solid var(--rule);
 }
 .info-block ul {
@@ -710,16 +797,17 @@ body {
   padding: 0;
 }
 .info-block ul li {
-  padding: 0.4rem 0 0.4rem 1.5rem;
+  padding: 0.65rem 0 0.65rem 1.75rem;
   position: relative;
-  line-height: 1.5;
+  line-height: 1.55;
+  font-size: 1.08rem;
 }
 .info-block ul li::before {
   content: '';
   position: absolute;
-  left: 0; top: 0.95rem;
-  width: 8px; height: 1px;
-  background: var(--gold-deep);
+  left: 0; top: 1.25rem;
+  width: 12px; height: 2px;
+  background: var(--gold);
 }
 
 .timeline {
@@ -728,35 +816,48 @@ body {
 }
 .timeline-row {
   display: grid;
-  grid-template-columns: 140px 1fr;
-  gap: 1.5rem;
-  padding: 0.9rem 0;
+  grid-template-columns: 160px 1fr;
+  gap: 1.75rem;
+  padding: 1.15rem 0;
   border-bottom: 1px dotted var(--rule);
 }
 .timeline-row:last-child { border-bottom: none; }
 .timeline-when {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.72rem;
+  font-family: 'Open Sans Condensed', 'Open Sans', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--gold-deep);
-  padding-top: 0.1rem;
+  color: var(--detail-accent-text, var(--azure));
+  padding-top: 0.15rem;
 }
 .timeline-what {
   font-family: 'Open Sans', sans-serif;
-  font-size: 1.02rem;
+  font-size: 1.08rem;
   color: var(--ink);
-  line-height: 1.45;
+  line-height: 1.55;
 }
 
 .note-card {
   background: var(--bone);
-  border-left: 3px solid var(--gold);
-  padding: 1rem 1.25rem;
-  margin: 1rem 0;
-  font-style: italic;
-  color: var(--ink-soft);
-  font-size: 1.02rem;
+  border-left: 4px solid var(--gold);
+  padding: 1.25rem 1.5rem;
+  margin: 1.25rem 0;
+  color: var(--ink);
+  font-size: 1.08rem;
+  line-height: 1.55;
+  border-radius: 0 4px 4px 0;
+}
+.note-card::before {
+  content: 'Note';
+  display: block;
+  font-family: 'Open Sans Condensed', 'Open Sans', sans-serif;
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+  margin-bottom: 0.5rem;
 }
 
 .kv-grid {
@@ -765,25 +866,28 @@ body {
   gap: 0;
   border: 1px solid var(--rule);
   background: var(--cream);
+  border-radius: 4px;
+  overflow: hidden;
 }
 .kv-row {
   display: grid;
-  grid-template-columns: 140px 1fr;
-  padding: 0.75rem 1rem;
+  grid-template-columns: 180px 1fr;
+  padding: 1rem 1.2rem;
   border-bottom: 1px solid var(--rule);
-  font-size: 0.98rem;
+  font-size: 1.05rem;
   align-items: center;
 }
 .kv-row:nth-last-child(-n+2) { border-bottom: none; }
 .kv-row:nth-child(odd) { border-right: 1px solid var(--rule); }
 .kv-row .k {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.7rem;
-  letter-spacing: 0.15em;
+  font-family: 'Open Sans Condensed', 'Open Sans', sans-serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--ink-soft);
 }
-.kv-row .v { color: var(--ink); }
+.kv-row .v { color: var(--ink); font-weight: 500; }
 
 /* ============== EVENT INFO STRIP ============== */
 .event-info {
@@ -865,14 +969,17 @@ body {
   .stream:last-child { border-bottom: none; }
   .ws-grid { grid-template-columns: 1fr; }
   .event-info { grid-template-columns: 1fr; }
-  .panel { width: 100%; }
-  .panel-head { padding: 1.5rem 1.5rem 1.25rem; }
-  .panel-body { padding: 0 1.5rem 2.5rem; }
-  .sub-tabs { margin: 0 -1.5rem 1.5rem; padding: 0 1.5rem; top: 150px; }
-  .masthead-meta { gap: 1rem; font-size: 0.7rem; }
-  .timeline-row { grid-template-columns: 100px 1fr; gap: 1rem; }
+  .masthead-meta { gap: 1rem; font-size: 0.8rem; }
+  /* Detail view: single column + jump menu instead of sidebar ToC */
+  .detail-layout { grid-template-columns: 1fr; gap: 0; }
+  .detail-toc { display: none; }
+  .detail-jump { display: block; }
+  .detail-header-inner { padding-left: 1rem; }
+  .detail-header::before { left: -1.25rem; }
+  .timeline-row { grid-template-columns: 110px 1fr; gap: 1rem; }
+  .timeline-when { font-size: 0.85rem; }
   .kv-grid { grid-template-columns: 1fr; }
-  .kv-row { border-right: none !important; }
+  .kv-row { border-right: none !important; grid-template-columns: 1fr; gap: 0.35rem; padding: 1rem 1.2rem; }
   .kv-row:nth-last-child(2) { border-bottom: 1px solid var(--rule); }
 }
 
@@ -907,6 +1014,7 @@ body {
 
 <!-- ============== APP ============== -->
 <div class="app" id="app" style="display:none;">
+<div class="dashboard-view">
 
   <!-- MASTHEAD -->
   <header class="masthead fade-up">
@@ -1039,20 +1147,47 @@ body {
     <div>Jockeys: route tasks · Secretary: publish tally · Chair: make the call</div>
   </footer>
 
+</div><!-- /.dashboard-view -->
+
+<!-- ============== FULL-PAGE WORKSTREAM DETAIL ============== -->
+<div class="detail-view" id="detail-view">
+  <div class="back-bar">
+    <button class="back-btn" id="back-btn" type="button">
+      <span class="arr">←</span>
+      <span>Back to dashboard</span>
+    </button>
+  </div>
+  <header class="detail-header" id="detail-header">
+    <div class="detail-header-inner">
+      <div class="detail-eyebrow" id="detail-eyebrow">§ Workstream</div>
+      <h1 class="detail-title" id="detail-title">—</h1>
+      <p class="detail-lede" id="detail-lede">—</p>
+    </div>
+  </header>
+
+  <div class="detail-layout">
+    <aside class="detail-toc">
+      <div class="detail-toc-label">Sections</div>
+      <nav id="detail-toc-list" class="toc-list"></nav>
+    </aside>
+    <div class="detail-main">
+      <div class="detail-jump">
+        <select id="detail-jump-select" onchange="jumpToSection(this.value)">
+          <option value="">Jump to section…</option>
+        </select>
+      </div>
+      <div id="detail-sections"></div>
+      <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--rule);">
+        <button class="back-btn" type="button" onclick="closeDetail()">
+          <span class="arr">←</span>
+          <span>Back to dashboard</span>
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
 
-<!-- ============== DETAIL PANEL ============== -->
-<div class="panel-backdrop" id="backdrop"></div>
-<aside class="panel" id="panel" aria-hidden="true">
-  <div class="panel-head">
-    <button class="panel-close" id="panel-close" aria-label="Close">✕</button>
-    <div class="panel-eyebrow" id="panel-eyebrow">§ Workstream</div>
-    <div class="panel-title" id="panel-title">—</div>
-    <div class="panel-lede" id="panel-lede">—</div>
-  </div>
-  <div class="sub-tabs" id="sub-tabs"></div>
-  <div class="panel-body" id="panel-body"></div>
-</aside>
+</div><!-- /.app -->
 
 <script>
 /* ====================================================
@@ -1792,81 +1927,172 @@ function initDashboard() {
     </div>
   `).join('');
 
-  // Wire up card clicks
+  // Wire up card clicks — open full-page detail via URL hash
   document.querySelectorAll('.ws-card').forEach(card => {
-    const open = () => openPanel(card.dataset.ws);
+    const open = () => { location.hash = '#' + card.dataset.ws; };
     card.addEventListener('click', open);
     card.addEventListener('keydown', e => {
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); }
     });
   });
+
+  // If the URL already has a workstream hash (shared link, reload), open it
+  handleRoute();
 }
 
 /* ====================================================
-   PANEL
+   FULL-PAGE DETAIL VIEW + URL HASH ROUTING
    ==================================================== */
-const panel = document.getElementById('panel');
-const backdrop = document.getElementById('backdrop');
-const panelClose = document.getElementById('panel-close');
+const appEl = document.getElementById('app');
+const backBtn = document.getElementById('back-btn');
+const detailEyebrow = document.getElementById('detail-eyebrow');
+const detailTitle = document.getElementById('detail-title');
+const detailLede = document.getElementById('detail-lede');
+const detailHeader = document.getElementById('detail-header');
+const detailTocList = document.getElementById('detail-toc-list');
+const detailSections = document.getElementById('detail-sections');
+const detailJumpSelect = document.getElementById('detail-jump-select');
 
-function openPanel(wsId) {
+// Map workstream id → accent colors (matches the card accents)
+const ACCENTS = {
+  sponsorships: { accent: 'var(--royal-deep)', text: 'var(--royal-deep)' },
+  marketing:    { accent: 'var(--gold)',       text: 'var(--gold-deep)' },
+  ops:          { accent: 'var(--azure)',      text: 'var(--azure)' },
+  auction:      { accent: 'var(--sky)',        text: 'var(--royal)' }
+};
+
+function openDetail(wsId) {
   const ws = WORKSTREAMS.find(w => w.id === wsId);
-  if (!ws) return;
-  document.getElementById('panel-eyebrow').textContent = ws.eyebrow;
-  document.getElementById('panel-title').textContent = ws.title;
-  document.getElementById('panel-lede').textContent = ws.lede;
+  if (!ws) { closeDetail(); return; }
 
-  // Build sub-tabs
-  const tabsEl = document.getElementById('sub-tabs');
-  tabsEl.innerHTML = ws.subs.map((s, i) => `
-    <button class="sub-tab ${i===0 ? 'active' : ''}" data-sub="${s.id}">${s.label}</button>
+  // Apply accent colors via CSS custom properties on the detail view
+  const accent = ACCENTS[wsId] || ACCENTS.sponsorships;
+  const dv = document.getElementById('detail-view');
+  dv.style.setProperty('--detail-accent', accent.accent);
+  dv.style.setProperty('--detail-accent-text', accent.text);
+
+  // Header
+  detailEyebrow.textContent = ws.eyebrow;
+  detailTitle.textContent = ws.title;
+  detailLede.textContent = ws.lede;
+
+  // Table of contents (desktop sidebar)
+  detailTocList.innerHTML = ws.subs.map((s, i) => `
+    <button class="toc-item" type="button" data-sub="${s.id}">
+      <span class="toc-num">${String(i+1).padStart(2,'0')}</span>${s.label}
+    </button>
   `).join('');
 
-  // Build sub-contents
-  const body = document.getElementById('panel-body');
-  body.innerHTML = ws.subs.map((s, i) => {
+  // Mobile jump select
+  detailJumpSelect.innerHTML = '<option value="">Jump to section…</option>' +
+    ws.subs.map((s, i) => `<option value="${s.id}">${String(i+1).padStart(2,'0')} · ${s.label}</option>`).join('');
+
+  // Render stacked sections
+  detailSections.innerHTML = ws.subs.map((s, i) => {
     const c = ws.content[s.id];
-    if (!c) return `<div class="sub-content ${i===0 ? 'active' : ''}" data-sub="${s.id}"><h3>${s.label}</h3><p style="color:var(--ink-soft); font-style:italic;">Details coming soon.</p></div>`;
+    const num = String(i+1).padStart(2, '0');
+    if (!c) {
+      return `
+        <section class="detail-section" id="sec-${s.id}">
+          <div class="detail-section-header">
+            <span class="detail-section-num">§ ${num}</span>
+            <h2 class="detail-section-title">${s.label}</h2>
+            <div class="detail-section-owner">${s.owner}</div>
+          </div>
+          <p style="font-size: 1.08rem; color: var(--ink-soft); font-style: italic;">
+            Details coming soon. This section will be filled in as committee decisions are made.
+          </p>
+        </section>
+      `;
+    }
     return `
-      <div class="sub-content ${i===0 ? 'active' : ''}" data-sub="${s.id}">
-        <h3>${c.title}</h3>
-        <div class="owner-line">${c.owner}</div>
+      <section class="detail-section" id="sec-${s.id}">
+        <div class="detail-section-header">
+          <span class="detail-section-num">§ ${num}</span>
+          <h2 class="detail-section-title">${c.title}</h2>
+          <div class="detail-section-owner">${c.owner}</div>
+        </div>
         ${(c.blocks || []).map(renderBlock).join('')}
-      </div>
+      </section>
     `;
   }).join('');
 
-  // Wire up tab clicks
-  tabsEl.querySelectorAll('.sub-tab').forEach(btn => {
+  // Wire up ToC clicks — smooth scroll to section
+  detailTocList.querySelectorAll('.toc-item').forEach(btn => {
     btn.addEventListener('click', () => {
-      tabsEl.querySelectorAll('.sub-tab').forEach(b => b.classList.remove('active'));
-      body.querySelectorAll('.sub-content').forEach(c => c.classList.remove('active'));
-      btn.classList.add('active');
-      const target = body.querySelector(`.sub-content[data-sub="${btn.dataset.sub}"]`);
-      if (target) target.classList.add('active');
-      // Scroll panel body to top on tab change
-      panel.scrollTop = 0;
+      const target = document.getElementById('sec-' + btn.dataset.sub);
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   });
 
-  panel.classList.add('open');
-  backdrop.classList.add('open');
-  panel.setAttribute('aria-hidden', 'false');
-  document.body.style.overflow = 'hidden';
+  // Swap views
+  appEl.classList.add('show-detail');
+  window.scrollTo({ top: 0, behavior: 'auto' });
+
+  // Set up scroll-spy to highlight active ToC item
+  setupScrollSpy(ws);
 }
 
-function closePanel() {
-  panel.classList.remove('open');
-  backdrop.classList.remove('open');
-  panel.setAttribute('aria-hidden', 'true');
-  document.body.style.overflow = '';
+function closeDetail() {
+  if (location.hash) {
+    // Using replaceState so the back button doesn't cycle through workstream hashes
+    history.pushState('', document.title, window.location.pathname + window.location.search);
+  }
+  appEl.classList.remove('show-detail');
+  teardownScrollSpy();
+  window.scrollTo({ top: 0, behavior: 'auto' });
 }
 
-panelClose.addEventListener('click', closePanel);
-backdrop.addEventListener('click', closePanel);
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape' && panel.classList.contains('open')) closePanel();
-});
+function jumpToSection(subId) {
+  if (!subId) return;
+  const target = document.getElementById('sec-' + subId);
+  if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  // Reset the select so it works if they pick the same option twice
+  detailJumpSelect.value = '';
+}
+
+// Scroll-spy: observe which section is visible, highlight its ToC item
+let scrollSpyObserver = null;
+function setupScrollSpy(ws) {
+  teardownScrollSpy();
+  const options = {
+    rootMargin: '-20% 0px -60% 0px',
+    threshold: 0
+  };
+  scrollSpyObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id.replace('sec-', '');
+        detailTocList.querySelectorAll('.toc-item').forEach(b => {
+          b.classList.toggle('active', b.dataset.sub === id);
+        });
+      }
+    });
+  }, options);
+  ws.subs.forEach(s => {
+    const el = document.getElementById('sec-' + s.id);
+    if (el) scrollSpyObserver.observe(el);
+  });
+}
+function teardownScrollSpy() {
+  if (scrollSpyObserver) { scrollSpyObserver.disconnect(); scrollSpyObserver = null; }
+}
+
+// Route based on hash
+function handleRoute() {
+  const hash = location.hash.replace(/^#/, '');
+  if (hash && WORKSTREAMS.find(w => w.id === hash)) {
+    openDetail(hash);
+  } else {
+    appEl.classList.remove('show-detail');
+    teardownScrollSpy();
+  }
+}
+
+backBtn.addEventListener('click', closeDetail);
+window.addEventListener('hashchange', handleRoute);
+window.addEventListener('popstate', handleRoute);
+// Initial route check happens inside initDashboard (after gate unlock)
 
 function renderBlock(b) {
   if (b.type === 'list') {
